@@ -1,0 +1,17 @@
+type Query {
+  fixtures(competitionId: ID!): [Fixture!]!
+  fixture(id: ID!): Fixture
+  homeTeamName: String!
+}
+
+#type Mutation {
+#  createDraft(title: String!, content: String): Post
+#  deletePost(id: ID!): Post
+#  publish(id: ID!): Post
+#}
+
+type Fixture {
+  id: ID!
+  homeTeamName: String!
+  awayTeamName: String!
+}
