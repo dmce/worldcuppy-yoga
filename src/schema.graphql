@@ -14,4 +14,13 @@ type Fixture {
   id: ID!
   homeTeamName: String!
   awayTeamName: String!
+  status: String!
+  date: String!
+  matchday: Int!
+  result: [Result!]
+}
+
+type Result {
+  goalsHomeTeam: Int!
+  goalsAwayTeam: Int!
 }
