@@ -1,7 +1,7 @@
 type Query {
   fixtures(competitionId: ID!): [Fixture!]!
   fixture(id: ID!): Fixture
-  homeTeamName: String!
+  users: [User]
 }
 
 #type Mutation {
@@ -10,6 +10,16 @@ type Query {
 #  publish(id: ID!): Post
 #}
 
+type Pick {
+  id: ID!
+  choice: String!
+  gameday: Int!
+  points: Int
+  resolved: Boolean
+  user: User!
+  fixture: Fixture!
+}
+
 type Fixture {
   id: ID!
   homeTeamName: String!
@@ -17,10 +27,16 @@ type Fixture {
   status: String!
   date: String!
   matchday: Int!
-  result: [Result!]
+  result: Result
+  picks: [Pick]
 }
 
 type Result {
-  goalsHomeTeam: Int!
-  goalsAwayTeam: Int!
+  goalsHomeTeam: Int
+  goalsAwayTeam: Int
+}
+
+type User {
+  id: ID!
+  username: String!
 }
