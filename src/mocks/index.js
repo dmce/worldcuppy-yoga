@@ -27,7 +27,7 @@ const mocks = {
   User: () => ({
     picks: parent => {
       const { id } = parent;
-      return picks.filter(p => p.user.id === id);
+      return picks.filter(p => p.userId === id);
     },
   }),
 };
