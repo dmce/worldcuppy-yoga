@@ -2,10 +2,23 @@ import fixtures from './data-fixtures';
 import users from './data-users';
 import picks from './data-picks';
 
+const isBefore = require('date-fns/is_before');
+const isAfter = require('date-fns/is_after');
+
+const filterFixtures = function(value, index, ar) {
+  if (
+    (this.timeFrameStart ? isAfter(value.date, this.timeFrameStart) : true) &&
+    (this.timeFrameEnd ? isBefore(value.date, this.timeFrameEnd) : true)
+  )
+    return true;
+
+  return false;
+};
+
 const mocks = {
   Query: () => ({
     fixtures: (parent, args) => {
-      fixtures;
+      return fixtures.filter(filterFixtures, args);
     },
     fixture: (parent, args) => {
       const { id } = args;

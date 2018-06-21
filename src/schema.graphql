@@ -1,5 +1,9 @@
 type Query {
-  fixtures(competitionId: ID!): [Fixture!]!
+  fixtures(
+    competitionId: ID!
+    timeFrameStart: String
+    timeFrameEnd: String
+  ): [Fixture]!
   fixture(id: ID!): Fixture
   users: [User]!
   user(id: ID!): User!

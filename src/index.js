@@ -10,7 +10,16 @@ const resolvers = {
   Query: {
     fixtures: (parent, args) => {
       const { competitionId } = args;
-      return fetch(`${baseUrl}/competitions/${competitionId}/fixtures`, {
+      // The competition id should be removed from the args below
+      // This is not working/tested code
+      // https://fetch.spec.whatwg.org/#fetch-api
+      // This may not be implemented in node-fetch
+      const url = new URL(`${baseUrl}/competitions/${competitionId}/fixtures`),
+        params = { args };
+      Object.keys(params).forEach(key =>
+        url.searchParams.append(key, params[key])
+      );
+      return fetch(url, {
         headers: { 'X-Auth-Token': key },
       }).then(res => res.json());
     },
