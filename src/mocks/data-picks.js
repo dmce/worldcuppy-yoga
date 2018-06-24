@@ -3,7 +3,7 @@ const picks = [];
 picks.push(
   {
     id: '1',
-    fixtureId: '165069',
+    fixtureId: 165069,
     choice: 'Russia',
     gameday: 1,
     matchday: 1,
@@ -13,7 +13,7 @@ picks.push(
   },
   {
     id: '2',
-    fixtureId: '165069',
+    fixtureId: 165069,
     choice: 'Russia',
     gameday: 1,
     matchday: 1,
@@ -23,7 +23,7 @@ picks.push(
   },
   {
     id: '3',
-    fixtureId: '165084',
+    fixtureId: 165084,
     choice: 'Egypt',
     gameday: 2,
     matchday: 1,

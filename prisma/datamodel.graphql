@@ -1,0 +1,15 @@
+type User {
+  id: ID! @unique
+  name: String!
+}
+
+type Pick {
+  id: ID! @unique
+  fixtureId: Int!
+  choice: String!
+  gameday: Int!
+  matchday: Int!
+  points: Int @default(value: 0)
+  resolved: Boolean @default(value: false)
+  user: User!
+}

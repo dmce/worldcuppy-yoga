@@ -8,7 +8,8 @@ const isAfter = require('date-fns/is_after');
 const filterFixtures = function(value, index, ar) {
   if (
     (this.timeFrameStart ? isAfter(value.date, this.timeFrameStart) : true) &&
-    (this.timeFrameEnd ? isBefore(value.date, this.timeFrameEnd) : true)
+    (this.timeFrameEnd ? isBefore(value.date, this.timeFrameEnd) : true) &&
+    (this.matchday? matchday : true)
   )
     return true;
 

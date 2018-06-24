@@ -3,11 +3,13 @@ type Query {
     competitionId: ID!
     timeFrameStart: String
     timeFrameEnd: String
+    matchday: Int
   ): [Fixture]!
   fixture(id: ID!): Fixture
   users: [User]!
   user(id: ID!): User!
   pick(id: ID!): Pick!
+  picks: [Pick]!
 }
 
 #type Mutation {
@@ -18,8 +20,8 @@ type Query {
 
 type Pick {
   id: ID!
-  fixtureId: ID!
-  choice: String!
+  fixtureId: Int!
+  choice: String
   gameday: Int!
   matchday: Int!
   points: Int
