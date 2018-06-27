@@ -1,3 +1,5 @@
+# import Pick, User from "./generated/schema.graphql"
+
 type Query {
   fixtures(
     competitionId: ID!
@@ -6,10 +8,26 @@ type Query {
     matchday: Int
   ): [Fixture]!
   fixture(id: ID!): Fixture
-  users: [User]!
-  user(id: ID!): User!
-  pick(id: ID!): Pick!
-  picks: [Pick]!
+  users(
+    where: UserWhereInput
+    orderBy: UserOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [User]!
+  user(where: PickWhereUniqueInput!): User!
+  pick(where: UserWhereUniqueInput!): Pick!
+  picks(
+    where: PickWhereInput
+    orderBy: PickOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Pick]!
 }
 
 #type Mutation {
@@ -18,17 +36,17 @@ type Query {
 #  publish(id: ID!): Post
 #}
 
-type Pick {
-  id: ID!
-  fixtureId: Int!
-  choice: String
-  gameday: Int!
-  matchday: Int!
-  points: Int
-  resolved: Boolean
-  user: User!
-  fixture: Fixture!
-}
+# type Pick {
+#   id: ID!
+#   fixtureId: Int!
+#   choice: String
+#   gameday: Int!
+#   matchday: Int!
+#   points: Int
+#   resolved: Boolean
+#   user: User!
+#   fixture: Fixture!
+# }
 
 type Fixture {
   id: ID!
@@ -46,8 +64,8 @@ type Result {
   goalsAwayTeam: Int
 }
 
-type User {
-  id: ID!
-  name: String!
-  picks: [Pick]!
-}
+# type User {
+#   id: ID!
+#   name: String!
+#   picks: [Pick]!
+# }
