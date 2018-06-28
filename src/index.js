@@ -1,8 +1,10 @@
 import { GraphQLServer } from 'graphql-yoga';
 import { Prisma, forwardTo } from 'prisma-binding';
 import mocks from './mocks/';
-require('dotenv').config();
 import fetch from 'node-fetch';
+
+require('dotenv').config();
+const querystring = require('querystring');
 
 const baseUrl = process.env.REST_FOOTBALL_DATA;
 const key = process.env.REST_FOOTBALL_DATA_KEY;
@@ -12,12 +14,12 @@ const resolvers = {
     fixtures: (parent, args) => {
       const { competitionId } = args;
       delete args.competitionId;
-      const url = new URL(`${baseUrl}/competitions/${competitionId}/fixtures`),
-        params = args;
-      Object.keys(params).forEach(key =>
-        url.searchParams.append(key, params[key])
-      );
-      return fetch(url, {
+
+      const url = `${baseUrl}/competitions/${competitionId}/fixtures`;
+      const qs =
+        Object.keys(args).length > 0 ? `?${querystring.stringify(args)}` : '';
+
+      return fetch(url + qs, {
         headers: { 'X-Auth-Token': key, 'X-Response-Control': 'minified' },
       })
         .then(res => res.json())
@@ -27,11 +29,8 @@ const resolvers = {
     },
     fixture: (parent, args) => {
       const { id } = args;
-      const url = new URL(`${baseUrl}/competitions/fixtures/${id}`),
-        params = args;
-      Object.keys(params).forEach(key =>
-        url.searchParams.append(key, params[key])
-      );
+      const url = `${baseUrl}/competitions/fixtures/${id}`;
+
       return fetch(url, {
         headers: { 'X-Auth-Token': key },
       }).then(res => console.log(res.json()));

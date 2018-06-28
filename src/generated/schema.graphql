@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Wed Jun 27 2018 09:02:13 GMT+0100 (British Summer Time)
+# timestamp: Thu Jun 28 2018 15:18:33 GMT+0100 (British Summer Time)
 
 type AggregatePick {
   count: Int!
@@ -21,18 +21,18 @@ Long can represent values between -(2^63) and 2^63 - 1.
 scalar Long
 
 type Mutation {
-  createPick(data: PickCreateInput!): Pick!
   createUser(data: UserCreateInput!): User!
-  updatePick(data: PickUpdateInput!, where: PickWhereUniqueInput!): Pick
+  createPick(data: PickCreateInput!): Pick!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  deletePick(where: PickWhereUniqueInput!): Pick
+  updatePick(data: PickUpdateInput!, where: PickWhereUniqueInput!): Pick
   deleteUser(where: UserWhereUniqueInput!): User
-  upsertPick(where: PickWhereUniqueInput!, create: PickCreateInput!, update: PickUpdateInput!): Pick!
+  deletePick(where: PickWhereUniqueInput!): Pick
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
-  updateManyPicks(data: PickUpdateInput!, where: PickWhereInput): BatchPayload!
+  upsertPick(where: PickWhereUniqueInput!, create: PickCreateInput!, update: PickUpdateInput!): Pick!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
-  deleteManyPicks(where: PickWhereInput): BatchPayload!
+  updateManyPicks(data: PickUpdateInput!, where: PickWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyPicks(where: PickWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -90,7 +90,21 @@ input PickCreateInput {
   matchday: Int!
   points: Int
   resolved: Boolean
-  user: UserCreateOneInput!
+  user: UserCreateOneWithoutPicksInput!
+}
+
+input PickCreateManyWithoutUserInput {
+  create: [PickCreateWithoutUserInput!]
+  connect: [PickWhereUniqueInput!]
+}
+
+input PickCreateWithoutUserInput {
+  fixtureId: Int!
+  choice: String!
+  gameday: Int!
+  matchday: Int!
+  points: Int
+  resolved: Boolean
 }
 
 """An edge in a connection."""
@@ -179,7 +193,36 @@ input PickUpdateInput {
   matchday: Int
   points: Int
   resolved: Boolean
-  user: UserUpdateOneInput
+  user: UserUpdateOneWithoutPicksInput
+}
+
+input PickUpdateManyWithoutUserInput {
+  create: [PickCreateWithoutUserInput!]
+  connect: [PickWhereUniqueInput!]
+  disconnect: [PickWhereUniqueInput!]
+  delete: [PickWhereUniqueInput!]
+  update: [PickUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [PickUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input PickUpdateWithoutUserDataInput {
+  fixtureId: Int
+  choice: String
+  gameday: Int
+  matchday: Int
+  points: Int
+  resolved: Boolean
+}
+
+input PickUpdateWithWhereUniqueWithoutUserInput {
+  where: PickWhereUniqueInput!
+  data: PickUpdateWithoutUserDataInput!
+}
+
+input PickUpsertWithWhereUniqueWithoutUserInput {
+  where: PickWhereUniqueInput!
+  update: PickUpdateWithoutUserDataInput!
+  create: PickCreateWithoutUserInput!
 }
 
 input PickWhereInput {
@@ -371,12 +414,12 @@ input PickWhereUniqueInput {
 }
 
 type Query {
-  picks(where: PickWhereInput, orderBy: PickOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Pick]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
-  pick(where: PickWhereUniqueInput!): Pick
+  picks(where: PickWhereInput, orderBy: PickOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Pick]!
   user(where: UserWhereUniqueInput!): User
-  picksConnection(where: PickWhereInput, orderBy: PickOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PickConnection!
+  pick(where: PickWhereUniqueInput!): Pick
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  picksConnection(where: PickWhereInput, orderBy: PickOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PickConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -386,13 +429,14 @@ type Query {
 }
 
 type Subscription {
-  pick(where: PickSubscriptionWhereInput): PickSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  pick(where: PickSubscriptionWhereInput): PickSubscriptionPayload
 }
 
 type User implements Node {
   id: ID!
   name: String!
+  picks(where: PickWhereInput, orderBy: PickOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Pick!]
 }
 
 """A connection to a list of items."""
@@ -407,11 +451,16 @@ type UserConnection {
 
 input UserCreateInput {
   name: String!
+  picks: PickCreateManyWithoutUserInput
 }
 
-input UserCreateOneInput {
-  create: UserCreateInput
+input UserCreateOneWithoutPicksInput {
+  create: UserCreateWithoutPicksInput
   connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutPicksInput {
+  name: String!
 }
 
 """An edge in a connection."""
@@ -478,25 +527,26 @@ input UserSubscriptionWhereInput {
   node: UserWhereInput
 }
 
-input UserUpdateDataInput {
-  name: String
-}
-
 input UserUpdateInput {
   name: String
+  picks: PickUpdateManyWithoutUserInput
 }
 
-input UserUpdateOneInput {
-  create: UserCreateInput
+input UserUpdateOneWithoutPicksInput {
+  create: UserCreateWithoutPicksInput
   connect: UserWhereUniqueInput
   delete: Boolean
-  update: UserUpdateDataInput
-  upsert: UserUpsertNestedInput
+  update: UserUpdateWithoutPicksDataInput
+  upsert: UserUpsertWithoutPicksInput
 }
 
-input UserUpsertNestedInput {
-  update: UserUpdateDataInput!
-  create: UserCreateInput!
+input UserUpdateWithoutPicksDataInput {
+  name: String
+}
+
+input UserUpsertWithoutPicksInput {
+  update: UserUpdateWithoutPicksDataInput!
+  create: UserCreateWithoutPicksInput!
 }
 
 input UserWhereInput {
@@ -588,9 +638,9 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  _MagicalBackRelation_PickToUser_every: PickWhereInput
-  _MagicalBackRelation_PickToUser_some: PickWhereInput
-  _MagicalBackRelation_PickToUser_none: PickWhereInput
+  picks_every: PickWhereInput
+  picks_some: PickWhereInput
+  picks_none: PickWhereInput
 }
 
 input UserWhereUniqueInput {

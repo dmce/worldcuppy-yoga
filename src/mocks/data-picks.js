@@ -9,7 +9,10 @@ picks.push(
     matchday: 1,
     points: 3,
     resolved: true,
-    user: 'twitter|user1',
+    user: {
+      id: '1',
+      name: 'twitter|user1',
+    },
   },
   {
     id: '2',
@@ -19,7 +22,10 @@ picks.push(
     matchday: 1,
     points: 3,
     resolved: true,
-    user: 'github|user2',
+    user: {
+      id: '2',
+      name: 'github|user2',
+    },
   },
   {
     id: '3',
@@ -29,7 +35,10 @@ picks.push(
     matchday: 1,
     points: 0,
     resolved: true,
-    user: 'twitter|user2',
+    user: {
+      id: '1',
+      name: 'twitter|user1',
+    },
   },
   {
     id: '4',
@@ -39,7 +48,10 @@ picks.push(
     matchday: 1,
     points: 1,
     resolved: true,
-    user: 'twitter|user1',
+    user: {
+      id: '2',
+      name: 'github|user2',
+    },
   },
   {
     id: '5',
@@ -49,7 +61,10 @@ picks.push(
     matchday: 1,
     points: 1,
     resolved: true,
-    user: 'twitter|user1',
+    user: {
+      id: '1',
+      name: 'twitter|user1',
+    },
   },
   {
     id: '6',
@@ -59,7 +74,10 @@ picks.push(
     matchday: 1,
     points: 3,
     resolved: true,
-    user: 'twitter|user2',
+    user: {
+      id: '2',
+      name: 'github|user2',
+    },
   }
 );
 
