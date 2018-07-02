@@ -16,7 +16,7 @@ const fixtures = [];
 
 fixtures.push(
   {
-    id: '165069',
+    id: 165069,
     homeTeamName: 'Russia',
     awayTeamName: 'Saudi Arabia',
     matchday: 1,
@@ -34,7 +34,7 @@ fixtures.push(
     status: 'FINISHED',
   },
   {
-    id: '165084',
+    id: 165084,
     homeTeamName: 'Egypt',
     awayTeamName: 'Uruguay',
     matchday: 2,
@@ -52,7 +52,7 @@ fixtures.push(
     status: 'FINISHED',
   },
   {
-    id: '165083',
+    id: 165083,
     homeTeamName: 'Morocco',
     awayTeamName: 'Iran',
     matchday: 2,
@@ -70,7 +70,7 @@ fixtures.push(
     status: 'FINISHED',
   },
   {
-    id: '165076',
+    id: 165076,
     homeTeamName: 'Portugal',
     awayTeamName: 'Spain',
     matchday: 2,
@@ -88,7 +88,7 @@ fixtures.push(
     status: 'FINISHED',
   },
   {
-    id: '165072',
+    id: 165072,
     homeTeamName: 'France',
     awayTeamName: 'Australia',
     matchday: 3,
@@ -104,7 +104,7 @@ fixtures.push(
     status: 'FINISHED',
   },
   {
-    id: '165073',
+    id: 165073,
     homeTeamName: 'Argentina',
     awayTeamName: 'Iceland',
     matchday: 3,
@@ -120,7 +120,7 @@ fixtures.push(
     status: 'FINISHED',
   },
   {
-    id: '165071',
+    id: 165071,
     homeTeamName: 'Peru',
     awayTeamName: 'Denmark',
     matchday: 3,

@@ -27,10 +27,14 @@ const mocks = {
     },
     users: () => users,
     user: (parent, args) => {
-      const { id } = args;
-      return users.find(f => f.id === id);
+      const { where } = args;
+      return users.find(f => f.id === where.id);
     },
     picks: () => picks,
+    pick: (parent, args) => {
+      const { where } = args;
+      return picks.find(f => f.id === where.id);
+    },
   }),
   Fixture: () => ({
     picks: parent => {
@@ -38,10 +42,16 @@ const mocks = {
       return picks.filter(p => p.fixtureId === id);
     },
   }),
+  Pick: () => ({
+    user: parent => {
+      const { user_id } = parent;
+      return users.find(u => u.id === user_id);
+    },
+  }),
   User: () => ({
     picks: parent => {
       const { id } = parent;
-      return picks.filter(p => p.userId === id);
+      return picks.filter(p => p.user_id === id);
     },
   }),
 };
