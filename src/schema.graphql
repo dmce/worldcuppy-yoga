@@ -1,43 +1,22 @@
-# import User from "./generated/schema.graphql"
-# import Query from "./generated/schema.graphql"
-
-extend type User {
-  picks: [Pick!]!
-}
+# import User from "./generated/prisma.graphql"
+# import Competition from "./generated/prisma.graphql"
+#
 
 type Query {
-  fixtures(
-    competitionId: ID!
-    timeFrameStart: String
-    timeFrameEnd: String
-    matchday: Int
-  ): [Fixture]!
-  fixture(id: ID!): Fixture
+  competitions(
+    where: CompetitionWhereInput
+    orderBy: CompetitionOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Competition]!
+  competition(where: CompetitionWhereUniqueInput!): Competition
+  user(where: UserWhereUniqueInput!): User
 }
 
-type Fixture {
-  id: ID!
-  homeTeamName: String!
-  awayTeamName: String!
-  status: String!
-  date: String!
-  matchday: Int!
-  result: Result
-  picks: [Pick!]!
-}
-
-type Result {
-  goalsHomeTeam: Int
-  goalsAwayTeam: Int
-}
-
-type Pick implements Node {
-  id: ID!
-  fixtureId: Int!
-  choice: String!
-  gameday: Int!
-  matchday: Int!
-  points: Int
-  resolved: Boolean
-  user(where: UserWhereInput): User!
+type Mutation {
+  createPick(data: PickCreateInput!): Pick!
+  deletePick(where: PickWhereUniqueInput!): Pick
 }

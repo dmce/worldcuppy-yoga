@@ -2,15 +2,74 @@ type User {
   id: ID! @unique
   name: String!
   picks: [Pick!]!
+  subs: [LeagueSubscription!]!
 }
 
 type Pick {
   id: ID! @unique
-  fixtureId: Int!
-  choice: String!
-  gameday: Int!
-  matchday: Int!
-  points: Int @default(value: "0")
-  resolved: Boolean @default(value: "false")
+  team: Team!
+  success: Boolean! @default(value: "false")
+  resolved: Boolean! @default(value: "false")
+  match: Match!
   user: User!
+  leagueSubscription: LeagueSubscription!
+}
+
+type League {
+  id: ID! @unique
+  name: String!
+  subs: [LeagueSubscription!]!
+}
+
+type LeagueSubscription {
+  id: ID! @unique
+  league: League!
+  users: [User!]!
+}
+
+type Competition {
+  id: ID! @unique
+  apiId: Int! @unique
+  name: String!
+  area: String!
+  seasons: [Season!]!
+}
+
+type Season {
+  id: ID! @unique
+  apiId: Int! @unique
+  startDate: String!
+  endDate: String!
+  currentMatchday: Int
+  competition: Competition!
+  matches: [Match!]!
+}
+
+type Team {
+  id: ID! @unique
+  apiId: Int! @unique
+  name: String!
+}
+
+type Match {
+  id: ID! @unique
+  apiId: Int! @unique
+  date: String!
+  matchday: Int!
+  stage: String!
+  group: String!
+  lastUpdated: String
+  homeTeam: Team! @relation(name: "HomeTeam")
+  awayTeam: Team! @relation(name: "AwayTeam")
+  season: Season!
+  winner: String
+  duration: String
+  fullTimeHome: Int
+  fullTimeAway: Int
+  halfTimeHome: Int
+  halfTimeAway: Int
+  extraTimeHome: Int
+  extraTimeAway: Int
+  penaltiesHome: Int
+  penaltiesAway: Int
 }
