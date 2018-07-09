@@ -17,6 +17,23 @@ const resolvers = {
     //pick: forwardTo('prisma'),
     //users: forwardTo('prisma'),
     user: forwardTo('prisma'),
+    fd_competitions: () => {
+      return fetch(`${baseUrl}/competitions/`, {
+        headers: { 'X-Auth-Token': key },
+      }).then(res => res.json());
+    },
+    fd_competition: (_, args) => {
+      const { id } = args;
+      return fetch(`${baseUrl}/competitions/${id}`, {
+        headers: { 'X-Auth-Token': key },
+      }).then(res => res.json());
+    },
+    fd_matches: (_, args) => {
+      const { competitionId } = args;
+      return fetch(`${baseUrl}/competitions/${competitionId}/matches`, {
+        headers: { 'X-Auth-Token': key },
+      }).then(res => res.json());
+    },
   },
 };
 
