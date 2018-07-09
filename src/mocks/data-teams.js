@@ -1,5 +1,3 @@
 const picks = [];
 
-picks.push(
-  {
-      
+picks.push({});

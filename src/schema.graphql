@@ -2,12 +2,69 @@
 # import Competition from "./generated/prisma.graphql"
 #
 
+type fdCompetitions {
+  count: Int!
+  competitions: [fdCompetition!]!
+}
+
 type fdCompetition {
-  id: Int
+  id: Int!
+  name: String!
+  plan: String!
+  lastUpdated: String!
+  area: fdArea
+  currentSeason: fdSeason
+  seasons: [fdSeason]
+}
+
+type fdArea {
+  id: Int!
+  name: String!
+}
+
+type fdSeason {
+  id: Int!
+  startDate: String
+  endDate: String
+  currentMatchday: Int
+}
+
+type fdMatches {
+  count: Int!
+  competition: fdCompetition
+  matches: [fdMatch!]!
 }
 
 type fdMatch {
-  id: Int
+  count: Int!
+  utcDate: String!
+  status: String!
+  matchdate: Int!
+  stage: String!
+  group: String!
+  lastUpdate: String!
+  homeTeam: fdTeam!
+  awayTeam: fdTeam!
+  score: fdScore!
+}
+
+type fdTeam {
+  id: Int!
+  name: String!
+}
+
+type fdScore {
+  winner: String!
+  duration: String!
+  fulltime: fdGoals
+  halfTime: fdGoals
+  extraTime: fdGoals
+  penalties: fdGoals
+}
+
+type fdGoals {
+  homeTeam: Int
+  awayTeam: Int
 }
 
 type Query {
@@ -22,9 +79,9 @@ type Query {
   ): [Competition]!
   competition(where: CompetitionWhereUniqueInput!): Competition
   user(where: UserWhereUniqueInput!): User
-  fd_competitions: [fdCompetition!]!
+  fd_competitions: fdCompetitions!
   fd_competition(id: Int!): fdCompetition!
-  fd_matches(competitionId: Int!): [fdMatch!]!
+  fd_matches(competitionId: Int!): fdMatches!
 }
 
 type Mutation {
