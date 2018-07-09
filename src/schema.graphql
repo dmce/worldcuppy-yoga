@@ -2,6 +2,14 @@
 # import Competition from "./generated/prisma.graphql"
 #
 
+type fdCompetition {
+  id: Int
+}
+
+type fdMatch {
+  id: Int
+}
+
 type Query {
   competitions(
     where: CompetitionWhereInput
@@ -14,6 +22,9 @@ type Query {
   ): [Competition]!
   competition(where: CompetitionWhereUniqueInput!): Competition
   user(where: UserWhereUniqueInput!): User
+  fd_competitions: [fdCompetition!]!
+  fd_competition(id: Int!): fdCompetition!
+  fd_matches(competitionId: Int!): [fdMatch!]!
 }
 
 type Mutation {
