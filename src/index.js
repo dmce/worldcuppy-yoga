@@ -26,7 +26,7 @@ const resolvers = {
       const { id } = args;
       return fetch(`${baseUrl}/competitions/${id}`, {
         headers: { 'X-Auth-Token': key },
-      }).then(res => res.json());
+      }).then(res => console.log(res.json()));
     },
     fd_matches: (_, args) => {
       const { competitionId } = args;

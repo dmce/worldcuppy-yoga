@@ -15,6 +15,7 @@
     "date-fns": "^1.29.0",
     "dotenv": "^6.0.0",
     "graphql-yoga": "^1.14.8",
+    "https-proxy-agent": "^2.2.1",
     "prisma-binding": "^2.1.0"
   },
   "devDependencies": {
