@@ -56,7 +56,7 @@ type fdTeam {
 
 type fdScore {
   winner: String
-  duration: String!
+  duration: String
   fulltime: fdGoals
   halfTime: fdGoals
   extraTime: fdGoals
@@ -78,11 +78,11 @@ type Query {
     first: Int
     last: Int
   ): [Competition]!
-  competition(id: Int!): Competition
+  competition(where: CompetitionWhereUniqueInput!): Competition
   user(where: UserWhereUniqueInput!): User
   fd_competitions: fdCompetitions!
   fd_competition(id: Int!): fdCompetition!
-  fd_matches(competitionId: Int!): fdMatches!
+  fd_matches(competitionId: Int!): fdMatches
 }
 
 type Mutation {

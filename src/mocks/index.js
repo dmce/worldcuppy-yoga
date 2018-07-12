@@ -31,9 +31,9 @@ const mocks = {
       const { competitionId } = args;
       return fd_matches.find(m => m.competition.id === competitionId);
     },
-    competition: (_, args) => {
-      const { id } = args;
-      return competitions.find(c => c.apiId === id);
+    competitions: (_, args) => {
+      const { where } = args;
+      return competitions.filter(c => c.apiId === where.apiId);
     },
     //   fixtures: (parent, args) => {
     //     return fixtures.filter(filterFixtures, args);
