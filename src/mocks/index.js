@@ -1,8 +1,8 @@
 import fixtures from './data-fixtures';
 import users from './data-users';
-import picks from './data-picks';
+import competitions from './data-competitions';
 import fd_competitions from './data-fd-competitions';
-import fd_matches from './data-fd-matches-epl';
+import fd_matches from './data-fd-matches';
 
 const isBefore = require('date-fns/is_before');
 const isAfter = require('date-fns/is_after');
@@ -25,12 +25,15 @@ const mocks = {
     },
     fd_competition: (_, args) => {
       const { id } = args;
-      console.log(id);
       return fd_competitions.competitions.find(c => c.id === id);
     },
-    fd_matches: (_, competitionId) => {
-      // return EPL 2018/19 matches or World Cup 2018 depending on import
-      return fd_matches;
+    fd_matches: (_, args) => {
+      const { competitionId } = args;
+      return fd_matches.find(m => m.competition.id === competitionId);
+    },
+    competition: (_, args) => {
+      const { id } = args;
+      return competitions.find(c => c.apiId === id);
     },
     //   fixtures: (parent, args) => {
     //     return fixtures.filter(filterFixtures, args);

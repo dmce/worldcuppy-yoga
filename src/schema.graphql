@@ -36,13 +36,14 @@ type fdMatches {
 }
 
 type fdMatch {
-  count: Int!
+  id: Int!
+  season: fdSeason!
   utcDate: String!
   status: String!
-  matchdate: Int!
+  matchday: Int
   stage: String!
   group: String!
-  lastUpdate: String!
+  lastUpdated: String!
   homeTeam: fdTeam!
   awayTeam: fdTeam!
   score: fdScore!
@@ -54,7 +55,7 @@ type fdTeam {
 }
 
 type fdScore {
-  winner: String!
+  winner: String
   duration: String!
   fulltime: fdGoals
   halfTime: fdGoals
@@ -77,7 +78,7 @@ type Query {
     first: Int
     last: Int
   ): [Competition]!
-  competition(where: CompetitionWhereUniqueInput!): Competition
+  competition(id: Int!): Competition
   user(where: UserWhereUniqueInput!): User
   fd_competitions: fdCompetitions!
   fd_competition(id: Int!): fdCompetition!
