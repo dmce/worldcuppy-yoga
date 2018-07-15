@@ -13,9 +13,6 @@ const resolvers = {
   Query: {
     competitions: forwardTo('prisma'),
     competition: forwardTo('prisma'),
-    //picks: forwardTo('prisma'),
-    //pick: forwardTo('prisma'),
-    //users: forwardTo('prisma'),
     user: forwardTo('prisma'),
     fd_competitions: () => {
       return fetch(`${baseUrl}/competitions/`, {

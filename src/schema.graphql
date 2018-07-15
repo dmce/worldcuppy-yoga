@@ -88,4 +88,5 @@ type Query {
 type Mutation {
   createPick(data: PickCreateInput!): Pick!
   deletePick(where: PickWhereUniqueInput!): Pick
+  createCompetition(data: CompetitionCreateInput!): Competition!
 }

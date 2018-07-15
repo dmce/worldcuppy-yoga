@@ -71,6 +71,13 @@ const mocks = {
     //     return picks.filter(p => p.user_id === id);
     //   },
   }),
+  Mutation: () => ({
+    createCompetition: (_, args) => {
+      const { data } = args;
+      competitions.push(data);
+      return data;
+    },
+  }),
 };
 
 export default mocks;
