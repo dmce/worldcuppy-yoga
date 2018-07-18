@@ -32,7 +32,7 @@ type Competition {
   apiId: Int! @unique
   name: String!
   area: String!
-  seasons: [Season!]!
+  seasons: [Season!]! @relation(name: "SeasonsByCompetition", onDelete: CASCADE)
 }
 
 type Season {
@@ -41,7 +41,7 @@ type Season {
   startDate: String!
   endDate: String!
   currentMatchday: Int
-  competition: Competition!
+  competition: Competition! @relation(name: "SeasonsByCompetition")
   matches: [Match!]!
 }
 

@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Thu Jul 05 2018 15:59:04 GMT+0100 (British Summer Time)
+# timestamp: Wed Jul 18 2018 20:47:47 GMT+0100 (GMT Summer Time)
 
 type AggregateCompetition {
   count: Int!

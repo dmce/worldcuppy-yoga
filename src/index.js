@@ -32,6 +32,9 @@ const resolvers = {
       }).then(res => res.json());
     },
   },
+  Mutation: {
+    createCompetition: forwardTo('prisma'),
+  },
 };
 
 const server = new GraphQLServer({

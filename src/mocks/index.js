@@ -74,6 +74,8 @@ const mocks = {
   Mutation: () => ({
     createCompetition: (_, args) => {
       const { data } = args;
+      // The create is needed by prisma. Removing for mocks
+      data.seasons = data.seasons.create;
       competitions.push(data);
       return data;
     },
