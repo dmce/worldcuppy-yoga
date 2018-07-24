@@ -13,6 +13,8 @@ const resolvers = {
   Query: {
     competitions: forwardTo('prisma'),
     competition: forwardTo('prisma'),
+    match: forwardTo('prisma'),
+    matches: forwardTo('prisma'),
     user: forwardTo('prisma'),
     fd_competitions: () => {
       return fetch(`${baseUrl}/competitions/`, {

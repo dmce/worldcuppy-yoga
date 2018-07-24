@@ -79,6 +79,16 @@ type Query {
     last: Int
   ): [Competition]!
   competition(where: CompetitionWhereUniqueInput!): Competition
+  matches(
+    where: MatchWhereInput
+    orderBy: MatchOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Match]!
+  match(where: MatchWhereUniqueInput!): Match
   user(where: UserWhereUniqueInput!): User
   fd_competitions: fdCompetitions!
   fd_competition(id: Int!): fdCompetition!
