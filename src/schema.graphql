@@ -98,5 +98,9 @@ type Query {
 type Mutation {
   createPick(data: PickCreateInput!): Pick!
   deletePick(where: PickWhereUniqueInput!): Pick
-  createCompetition(data: CompetitionCreateInput!): Competition!
+  upsertCompetition(
+    where: CompetitionWhereUniqueInput!
+    create: CompetitionCreateInput!
+    update: CompetitionUpdateInput!
+  ): Competition!
 }

@@ -35,7 +35,7 @@ const resolvers = {
     },
   },
   Mutation: {
-    createCompetition: forwardTo('prisma'),
+    upsertCompetition: forwardTo('prisma'),
   },
 };
 

@@ -15,9 +15,11 @@ matches.push(
     awayTeam: {
       name: 'Team 2',
     },
-    season: {},
+    season: {
+      apiId: 151,
+    },
     winner: null,
-    duration: null,
+    duration: 'REGULAR',
     fullTimeHome: null,
     fullTimeAway: null,
     halfTimeHome: null,
@@ -37,9 +39,11 @@ matches.push(
     lastUpdated: '2018-07-07T16:01:35Z',
     homeTeam: { name: 'Team 2' },
     awayTeam: { name: 'Team 1' },
-    season: {},
+    season: {
+      apiId: 151,
+    },
     winner: null,
-    duration: null,
+    duration: 'REGULAR',
     fullTimeHome: null,
     fullTimeAway: null,
     halfTimeHome: null,

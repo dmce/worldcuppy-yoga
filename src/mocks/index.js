@@ -51,7 +51,7 @@ const mocks = {
     },
     matches: (_, args) => {
       const { where } = args;
-      return matches.filter(c => c.apiId === where.apiId);
+      return matches.filter(c => c.season.apiId === where.apiId);
     },
     //   fixtures: (parent, args) => {
     //     return fixtures.filter(filterFixtures, args);
@@ -90,12 +90,11 @@ const mocks = {
     //   },
   }),
   Mutation: () => ({
-    createCompetition: (_, args) => {
-      const { data } = args;
+    upsertCompetition: (_, args) => {
+      const { where, create, update } = args;
       // The create is needed by prisma. Removing for mocks
-      data.seasons = data.seasons.create;
-      competitions.push(data);
-      return data;
+      competitions.push(create);
+      return competitions;
     },
   }),
 };
