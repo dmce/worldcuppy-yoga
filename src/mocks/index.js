@@ -93,8 +93,18 @@ const mocks = {
     upsertCompetition: (_, args) => {
       const { where, create, update } = args;
       // The create is needed by prisma. Removing for mocks
-      competitions.push(create);
-      return competitions;
+      let competitionIndex = competitions.findIndex(
+        c => c.apiId === where.apiId
+      );
+      if (competitionIndex > -1) {
+        update.seasons = [];
+        competitions[competitionIndex] = update;
+        return update;
+      } else {
+        create.seasons = [];
+        competitions.push(create);
+        return create;
+      }
     },
   }),
 };
