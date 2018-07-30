@@ -1,40 +1,44 @@
 # worldcuppy-prisma
 
 ```mutation {
-  createPick(data: {
-    fixtureId: 165069,
-    choice: "Russia",
-    gameday: 1,
-    matchday: 1,
-    points: 3,
-    resolved: true,
-    user: {
-      connect: {
-        id: "cjivpp3xg000f0713aisep9th"
+  upsertCompetition(where: {apiId: 2014}, create: {
+    								apiId: 2014,
+                    name: "Seria C",
+                    area: "Italy",
+                    seasons: {create: [
+                        {
+                          apiId: 3,
+                          startDate: "2018-01-01",
+                          endDate: "2018-01-01",
+                          currentMatchday: 1
+                          matches: {create : null}
+                        },
+                      ],
+                    }}, update: {
+    								apiId: 2011,
+                    name: "Seria A",
+                    area: "Italy",
+                    seasons: {create: [
+                        {
+                          apiId: 4,
+                          startDate: "2018-01-01",
+                          endDate: "2018-01-01",
+                          currentMatchday: 1
+                        },
+                    ]}}) {
+
+      id
+      apiId
+      name
+      area
+      seasons {
+        id
+        apiId
+        startDate
+        endDate
+        currentMatchday
       }
     }
-  }) {
-    id
-  }
-}
-```
-
-```
-query {
-  user(where: {id:"cjiwx11nz000m07865xqwk9es"}) {
-    name
-  }
-}
-```
-
-```
-query {
-  pick(where: {id:"cjiwx1y1z000w07864zj2woq8"}) {
-    choice
-    user {
-      name
-    }
-  }
 }
 ```
 
