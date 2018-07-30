@@ -38,6 +38,7 @@ const mocks = {
     },
     competitions: (_, args) => {
       const { where } = args;
+      if (where === undefined) return competitions;
       return competitions.filter(c => c.apiId === where.apiId);
     },
     season: (_, args) => {
