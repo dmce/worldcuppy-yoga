@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Wed Jul 18 2018 20:47:47 GMT+0100 (GMT Summer Time)
+# timestamp: Mon Jul 30 2018 16:06:38 GMT+0100 (British Summer Time)
 
 type AggregateCompetition {
   count: Int!
@@ -760,13 +760,14 @@ scalar Long
 type Match implements Node {
   id: ID!
   apiId: Int!
-  date: String!
+  utcDate: String!
   matchday: Int!
   stage: String!
   group: String!
+  status: String!
   lastUpdated: String
-  homeTeam(where: TeamWhereInput): Team!
-  awayTeam(where: TeamWhereInput): Team!
+  homeTeam: String!
+  awayTeam: String!
   season(where: SeasonWhereInput): Season!
   winner: String
   duration: String
@@ -792,11 +793,14 @@ type MatchConnection {
 
 input MatchCreateInput {
   apiId: Int!
-  date: String!
+  utcDate: String!
   matchday: Int!
   stage: String!
   group: String!
+  status: String!
   lastUpdated: String
+  homeTeam: String!
+  awayTeam: String!
   winner: String
   duration: String
   fullTimeHome: Int
@@ -807,8 +811,6 @@ input MatchCreateInput {
   extraTimeAway: Int
   penaltiesHome: Int
   penaltiesAway: Int
-  homeTeam: TeamCreateOneInput!
-  awayTeam: TeamCreateOneInput!
   season: SeasonCreateOneWithoutMatchesInput!
 }
 
@@ -824,11 +826,14 @@ input MatchCreateOneInput {
 
 input MatchCreateWithoutSeasonInput {
   apiId: Int!
-  date: String!
+  utcDate: String!
   matchday: Int!
   stage: String!
   group: String!
+  status: String!
   lastUpdated: String
+  homeTeam: String!
+  awayTeam: String!
   winner: String
   duration: String
   fullTimeHome: Int
@@ -839,8 +844,6 @@ input MatchCreateWithoutSeasonInput {
   extraTimeAway: Int
   penaltiesHome: Int
   penaltiesAway: Int
-  homeTeam: TeamCreateOneInput!
-  awayTeam: TeamCreateOneInput!
 }
 
 """An edge in a connection."""
@@ -857,16 +860,22 @@ enum MatchOrderByInput {
   id_DESC
   apiId_ASC
   apiId_DESC
-  date_ASC
-  date_DESC
+  utcDate_ASC
+  utcDate_DESC
   matchday_ASC
   matchday_DESC
   stage_ASC
   stage_DESC
   group_ASC
   group_DESC
+  status_ASC
+  status_DESC
   lastUpdated_ASC
   lastUpdated_DESC
+  homeTeam_ASC
+  homeTeam_DESC
+  awayTeam_ASC
+  awayTeam_DESC
   winner_ASC
   winner_DESC
   duration_ASC
@@ -896,11 +905,14 @@ enum MatchOrderByInput {
 type MatchPreviousValues {
   id: ID!
   apiId: Int!
-  date: String!
+  utcDate: String!
   matchday: Int!
   stage: String!
   group: String!
+  status: String!
   lastUpdated: String
+  homeTeam: String!
+  awayTeam: String!
   winner: String
   duration: String
   fullTimeHome: Int
@@ -954,11 +966,14 @@ input MatchSubscriptionWhereInput {
 
 input MatchUpdateDataInput {
   apiId: Int
-  date: String
+  utcDate: String
   matchday: Int
   stage: String
   group: String
+  status: String
   lastUpdated: String
+  homeTeam: String
+  awayTeam: String
   winner: String
   duration: String
   fullTimeHome: Int
@@ -969,18 +984,19 @@ input MatchUpdateDataInput {
   extraTimeAway: Int
   penaltiesHome: Int
   penaltiesAway: Int
-  homeTeam: TeamUpdateOneInput
-  awayTeam: TeamUpdateOneInput
   season: SeasonUpdateOneWithoutMatchesInput
 }
 
 input MatchUpdateInput {
   apiId: Int
-  date: String
+  utcDate: String
   matchday: Int
   stage: String
   group: String
+  status: String
   lastUpdated: String
+  homeTeam: String
+  awayTeam: String
   winner: String
   duration: String
   fullTimeHome: Int
@@ -991,8 +1007,6 @@ input MatchUpdateInput {
   extraTimeAway: Int
   penaltiesHome: Int
   penaltiesAway: Int
-  homeTeam: TeamUpdateOneInput
-  awayTeam: TeamUpdateOneInput
   season: SeasonUpdateOneWithoutMatchesInput
 }
 
@@ -1015,11 +1029,14 @@ input MatchUpdateOneInput {
 
 input MatchUpdateWithoutSeasonDataInput {
   apiId: Int
-  date: String
+  utcDate: String
   matchday: Int
   stage: String
   group: String
+  status: String
   lastUpdated: String
+  homeTeam: String
+  awayTeam: String
   winner: String
   duration: String
   fullTimeHome: Int
@@ -1030,8 +1047,6 @@ input MatchUpdateWithoutSeasonDataInput {
   extraTimeAway: Int
   penaltiesHome: Int
   penaltiesAway: Int
-  homeTeam: TeamUpdateOneInput
-  awayTeam: TeamUpdateOneInput
 }
 
 input MatchUpdateWithWhereUniqueWithoutSeasonInput {
@@ -1121,46 +1136,46 @@ input MatchWhereInput {
 
   """All values greater than or equal the given value."""
   apiId_gte: Int
-  date: String
+  utcDate: String
 
   """All values that are not equal to given value."""
-  date_not: String
+  utcDate_not: String
 
   """All values that are contained in given list."""
-  date_in: [String!]
+  utcDate_in: [String!]
 
   """All values that are not contained in given list."""
-  date_not_in: [String!]
+  utcDate_not_in: [String!]
 
   """All values less than the given value."""
-  date_lt: String
+  utcDate_lt: String
 
   """All values less than or equal the given value."""
-  date_lte: String
+  utcDate_lte: String
 
   """All values greater than the given value."""
-  date_gt: String
+  utcDate_gt: String
 
   """All values greater than or equal the given value."""
-  date_gte: String
+  utcDate_gte: String
 
   """All values containing the given string."""
-  date_contains: String
+  utcDate_contains: String
 
   """All values not containing the given string."""
-  date_not_contains: String
+  utcDate_not_contains: String
 
   """All values starting with the given string."""
-  date_starts_with: String
+  utcDate_starts_with: String
 
   """All values not starting with the given string."""
-  date_not_starts_with: String
+  utcDate_not_starts_with: String
 
   """All values ending with the given string."""
-  date_ends_with: String
+  utcDate_ends_with: String
 
   """All values not ending with the given string."""
-  date_not_ends_with: String
+  utcDate_not_ends_with: String
   matchday: Int
 
   """All values that are not equal to given value."""
@@ -1263,6 +1278,46 @@ input MatchWhereInput {
 
   """All values not ending with the given string."""
   group_not_ends_with: String
+  status: String
+
+  """All values that are not equal to given value."""
+  status_not: String
+
+  """All values that are contained in given list."""
+  status_in: [String!]
+
+  """All values that are not contained in given list."""
+  status_not_in: [String!]
+
+  """All values less than the given value."""
+  status_lt: String
+
+  """All values less than or equal the given value."""
+  status_lte: String
+
+  """All values greater than the given value."""
+  status_gt: String
+
+  """All values greater than or equal the given value."""
+  status_gte: String
+
+  """All values containing the given string."""
+  status_contains: String
+
+  """All values not containing the given string."""
+  status_not_contains: String
+
+  """All values starting with the given string."""
+  status_starts_with: String
+
+  """All values not starting with the given string."""
+  status_not_starts_with: String
+
+  """All values ending with the given string."""
+  status_ends_with: String
+
+  """All values not ending with the given string."""
+  status_not_ends_with: String
   lastUpdated: String
 
   """All values that are not equal to given value."""
@@ -1303,6 +1358,86 @@ input MatchWhereInput {
 
   """All values not ending with the given string."""
   lastUpdated_not_ends_with: String
+  homeTeam: String
+
+  """All values that are not equal to given value."""
+  homeTeam_not: String
+
+  """All values that are contained in given list."""
+  homeTeam_in: [String!]
+
+  """All values that are not contained in given list."""
+  homeTeam_not_in: [String!]
+
+  """All values less than the given value."""
+  homeTeam_lt: String
+
+  """All values less than or equal the given value."""
+  homeTeam_lte: String
+
+  """All values greater than the given value."""
+  homeTeam_gt: String
+
+  """All values greater than or equal the given value."""
+  homeTeam_gte: String
+
+  """All values containing the given string."""
+  homeTeam_contains: String
+
+  """All values not containing the given string."""
+  homeTeam_not_contains: String
+
+  """All values starting with the given string."""
+  homeTeam_starts_with: String
+
+  """All values not starting with the given string."""
+  homeTeam_not_starts_with: String
+
+  """All values ending with the given string."""
+  homeTeam_ends_with: String
+
+  """All values not ending with the given string."""
+  homeTeam_not_ends_with: String
+  awayTeam: String
+
+  """All values that are not equal to given value."""
+  awayTeam_not: String
+
+  """All values that are contained in given list."""
+  awayTeam_in: [String!]
+
+  """All values that are not contained in given list."""
+  awayTeam_not_in: [String!]
+
+  """All values less than the given value."""
+  awayTeam_lt: String
+
+  """All values less than or equal the given value."""
+  awayTeam_lte: String
+
+  """All values greater than the given value."""
+  awayTeam_gt: String
+
+  """All values greater than or equal the given value."""
+  awayTeam_gte: String
+
+  """All values containing the given string."""
+  awayTeam_contains: String
+
+  """All values not containing the given string."""
+  awayTeam_not_contains: String
+
+  """All values starting with the given string."""
+  awayTeam_starts_with: String
+
+  """All values not starting with the given string."""
+  awayTeam_not_starts_with: String
+
+  """All values ending with the given string."""
+  awayTeam_ends_with: String
+
+  """All values not ending with the given string."""
+  awayTeam_not_ends_with: String
   winner: String
 
   """All values that are not equal to given value."""
@@ -1559,8 +1694,6 @@ input MatchWhereInput {
 
   """All values greater than or equal the given value."""
   penaltiesAway_gte: Int
-  homeTeam: TeamWhereInput
-  awayTeam: TeamWhereInput
   season: SeasonWhereInput
   _MagicalBackRelation_MatchToPick_every: PickWhereInput
   _MagicalBackRelation_MatchToPick_some: PickWhereInput
@@ -1578,49 +1711,49 @@ type Mutation {
   createLeague(data: LeagueCreateInput!): League!
   createCompetition(data: CompetitionCreateInput!): Competition!
   createSeason(data: SeasonCreateInput!): Season!
+  createTeam(data: TeamCreateInput!): Team!
   createLeagueSubscription(data: LeagueSubscriptionCreateInput!): LeagueSubscription!
   createMatch(data: MatchCreateInput!): Match!
-  createTeam(data: TeamCreateInput!): Team!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updatePick(data: PickUpdateInput!, where: PickWhereUniqueInput!): Pick
   updateLeague(data: LeagueUpdateInput!, where: LeagueWhereUniqueInput!): League
   updateCompetition(data: CompetitionUpdateInput!, where: CompetitionWhereUniqueInput!): Competition
   updateSeason(data: SeasonUpdateInput!, where: SeasonWhereUniqueInput!): Season
+  updateTeam(data: TeamUpdateInput!, where: TeamWhereUniqueInput!): Team
   updateLeagueSubscription(data: LeagueSubscriptionUpdateInput!, where: LeagueSubscriptionWhereUniqueInput!): LeagueSubscription
   updateMatch(data: MatchUpdateInput!, where: MatchWhereUniqueInput!): Match
-  updateTeam(data: TeamUpdateInput!, where: TeamWhereUniqueInput!): Team
   deleteUser(where: UserWhereUniqueInput!): User
   deletePick(where: PickWhereUniqueInput!): Pick
   deleteLeague(where: LeagueWhereUniqueInput!): League
   deleteCompetition(where: CompetitionWhereUniqueInput!): Competition
   deleteSeason(where: SeasonWhereUniqueInput!): Season
+  deleteTeam(where: TeamWhereUniqueInput!): Team
   deleteLeagueSubscription(where: LeagueSubscriptionWhereUniqueInput!): LeagueSubscription
   deleteMatch(where: MatchWhereUniqueInput!): Match
-  deleteTeam(where: TeamWhereUniqueInput!): Team
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertPick(where: PickWhereUniqueInput!, create: PickCreateInput!, update: PickUpdateInput!): Pick!
   upsertLeague(where: LeagueWhereUniqueInput!, create: LeagueCreateInput!, update: LeagueUpdateInput!): League!
   upsertCompetition(where: CompetitionWhereUniqueInput!, create: CompetitionCreateInput!, update: CompetitionUpdateInput!): Competition!
   upsertSeason(where: SeasonWhereUniqueInput!, create: SeasonCreateInput!, update: SeasonUpdateInput!): Season!
+  upsertTeam(where: TeamWhereUniqueInput!, create: TeamCreateInput!, update: TeamUpdateInput!): Team!
   upsertLeagueSubscription(where: LeagueSubscriptionWhereUniqueInput!, create: LeagueSubscriptionCreateInput!, update: LeagueSubscriptionUpdateInput!): LeagueSubscription!
   upsertMatch(where: MatchWhereUniqueInput!, create: MatchCreateInput!, update: MatchUpdateInput!): Match!
-  upsertTeam(where: TeamWhereUniqueInput!, create: TeamCreateInput!, update: TeamUpdateInput!): Team!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
   updateManyPicks(data: PickUpdateInput!, where: PickWhereInput): BatchPayload!
   updateManyLeagues(data: LeagueUpdateInput!, where: LeagueWhereInput): BatchPayload!
   updateManyCompetitions(data: CompetitionUpdateInput!, where: CompetitionWhereInput): BatchPayload!
   updateManySeasons(data: SeasonUpdateInput!, where: SeasonWhereInput): BatchPayload!
+  updateManyTeams(data: TeamUpdateInput!, where: TeamWhereInput): BatchPayload!
   updateManyLeagueSubscriptions(data: LeagueSubscriptionUpdateInput!, where: LeagueSubscriptionWhereInput): BatchPayload!
   updateManyMatches(data: MatchUpdateInput!, where: MatchWhereInput): BatchPayload!
-  updateManyTeams(data: TeamUpdateInput!, where: TeamWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyPicks(where: PickWhereInput): BatchPayload!
   deleteManyLeagues(where: LeagueWhereInput): BatchPayload!
   deleteManyCompetitions(where: CompetitionWhereInput): BatchPayload!
   deleteManySeasons(where: SeasonWhereInput): BatchPayload!
+  deleteManyTeams(where: TeamWhereInput): BatchPayload!
   deleteManyLeagueSubscriptions(where: LeagueSubscriptionWhereInput): BatchPayload!
   deleteManyMatches(where: MatchWhereInput): BatchPayload!
-  deleteManyTeams(where: TeamWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -1652,7 +1785,7 @@ type PageInfo {
 
 type Pick implements Node {
   id: ID!
-  team(where: TeamWhereInput): Team!
+  team: String!
   success: Boolean!
   resolved: Boolean!
   match(where: MatchWhereInput): Match!
@@ -1671,9 +1804,9 @@ type PickConnection {
 }
 
 input PickCreateInput {
+  team: String!
   success: Boolean
   resolved: Boolean
-  team: TeamCreateOneInput!
   match: MatchCreateOneInput!
   user: UserCreateOneWithoutPicksInput!
   leagueSubscription: LeagueSubscriptionCreateOneInput!
@@ -1685,9 +1818,9 @@ input PickCreateManyWithoutUserInput {
 }
 
 input PickCreateWithoutUserInput {
+  team: String!
   success: Boolean
   resolved: Boolean
-  team: TeamCreateOneInput!
   match: MatchCreateOneInput!
   leagueSubscription: LeagueSubscriptionCreateOneInput!
 }
@@ -1704,6 +1837,8 @@ type PickEdge {
 enum PickOrderByInput {
   id_ASC
   id_DESC
+  team_ASC
+  team_DESC
   success_ASC
   success_DESC
   resolved_ASC
@@ -1716,6 +1851,7 @@ enum PickOrderByInput {
 
 type PickPreviousValues {
   id: ID!
+  team: String!
   success: Boolean!
   resolved: Boolean!
 }
@@ -1760,9 +1896,9 @@ input PickSubscriptionWhereInput {
 }
 
 input PickUpdateInput {
+  team: String
   success: Boolean
   resolved: Boolean
-  team: TeamUpdateOneInput
   match: MatchUpdateOneInput
   user: UserUpdateOneWithoutPicksInput
   leagueSubscription: LeagueSubscriptionUpdateOneInput
@@ -1778,9 +1914,9 @@ input PickUpdateManyWithoutUserInput {
 }
 
 input PickUpdateWithoutUserDataInput {
+  team: String
   success: Boolean
   resolved: Boolean
-  team: TeamUpdateOneInput
   match: MatchUpdateOneInput
   leagueSubscription: LeagueSubscriptionUpdateOneInput
 }
@@ -1845,6 +1981,46 @@ input PickWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  team: String
+
+  """All values that are not equal to given value."""
+  team_not: String
+
+  """All values that are contained in given list."""
+  team_in: [String!]
+
+  """All values that are not contained in given list."""
+  team_not_in: [String!]
+
+  """All values less than the given value."""
+  team_lt: String
+
+  """All values less than or equal the given value."""
+  team_lte: String
+
+  """All values greater than the given value."""
+  team_gt: String
+
+  """All values greater than or equal the given value."""
+  team_gte: String
+
+  """All values containing the given string."""
+  team_contains: String
+
+  """All values not containing the given string."""
+  team_not_contains: String
+
+  """All values starting with the given string."""
+  team_starts_with: String
+
+  """All values not starting with the given string."""
+  team_not_starts_with: String
+
+  """All values ending with the given string."""
+  team_ends_with: String
+
+  """All values not ending with the given string."""
+  team_not_ends_with: String
   success: Boolean
 
   """All values that are not equal to given value."""
@@ -1853,7 +2029,6 @@ input PickWhereInput {
 
   """All values that are not equal to given value."""
   resolved_not: Boolean
-  team: TeamWhereInput
   match: MatchWhereInput
   user: UserWhereInput
   leagueSubscription: LeagueSubscriptionWhereInput
@@ -1869,25 +2044,25 @@ type Query {
   leagues(where: LeagueWhereInput, orderBy: LeagueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [League]!
   competitions(where: CompetitionWhereInput, orderBy: CompetitionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Competition]!
   seasons(where: SeasonWhereInput, orderBy: SeasonOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Season]!
+  teams(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team]!
   leagueSubscriptions(where: LeagueSubscriptionWhereInput, orderBy: LeagueSubscriptionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [LeagueSubscription]!
   matches(where: MatchWhereInput, orderBy: MatchOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Match]!
-  teams(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team]!
   user(where: UserWhereUniqueInput!): User
   pick(where: PickWhereUniqueInput!): Pick
   league(where: LeagueWhereUniqueInput!): League
   competition(where: CompetitionWhereUniqueInput!): Competition
   season(where: SeasonWhereUniqueInput!): Season
+  team(where: TeamWhereUniqueInput!): Team
   leagueSubscription(where: LeagueSubscriptionWhereUniqueInput!): LeagueSubscription
   match(where: MatchWhereUniqueInput!): Match
-  team(where: TeamWhereUniqueInput!): Team
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   picksConnection(where: PickWhereInput, orderBy: PickOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PickConnection!
   leaguesConnection(where: LeagueWhereInput, orderBy: LeagueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LeagueConnection!
   competitionsConnection(where: CompetitionWhereInput, orderBy: CompetitionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CompetitionConnection!
   seasonsConnection(where: SeasonWhereInput, orderBy: SeasonOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SeasonConnection!
+  teamsConnection(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TeamConnection!
   leagueSubscriptionsConnection(where: LeagueSubscriptionWhereInput, orderBy: LeagueSubscriptionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LeagueSubscriptionConnection!
   matchesConnection(where: MatchWhereInput, orderBy: MatchOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MatchConnection!
-  teamsConnection(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TeamConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -2272,9 +2447,9 @@ type Subscription {
   league(where: LeagueSubscriptionWhereInput): LeagueSubscriptionPayload
   competition(where: CompetitionSubscriptionWhereInput): CompetitionSubscriptionPayload
   season(where: SeasonSubscriptionWhereInput): SeasonSubscriptionPayload
+  team(where: TeamSubscriptionWhereInput): TeamSubscriptionPayload
   leagueSubscription(where: LeagueSubscriptionSubscriptionWhereInput): LeagueSubscriptionSubscriptionPayload
   match(where: MatchSubscriptionWhereInput): MatchSubscriptionPayload
-  team(where: TeamSubscriptionWhereInput): TeamSubscriptionPayload
 }
 
 type Team implements Node {
@@ -2296,11 +2471,6 @@ type TeamConnection {
 input TeamCreateInput {
   apiId: Int!
   name: String!
-}
-
-input TeamCreateOneInput {
-  create: TeamCreateInput
-  connect: TeamWhereUniqueInput
 }
 
 """An edge in a connection."""
@@ -2370,27 +2540,9 @@ input TeamSubscriptionWhereInput {
   node: TeamWhereInput
 }
 
-input TeamUpdateDataInput {
-  apiId: Int
-  name: String
-}
-
 input TeamUpdateInput {
   apiId: Int
   name: String
-}
-
-input TeamUpdateOneInput {
-  create: TeamCreateInput
-  connect: TeamWhereUniqueInput
-  delete: Boolean
-  update: TeamUpdateDataInput
-  upsert: TeamUpsertNestedInput
-}
-
-input TeamUpsertNestedInput {
-  update: TeamUpdateDataInput!
-  create: TeamCreateInput!
 }
 
 input TeamWhereInput {
@@ -2504,15 +2656,6 @@ input TeamWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  _MagicalBackRelation_AwayTeam_every: MatchWhereInput
-  _MagicalBackRelation_AwayTeam_some: MatchWhereInput
-  _MagicalBackRelation_AwayTeam_none: MatchWhereInput
-  _MagicalBackRelation_PickToTeam_every: PickWhereInput
-  _MagicalBackRelation_PickToTeam_some: PickWhereInput
-  _MagicalBackRelation_PickToTeam_none: PickWhereInput
-  _MagicalBackRelation_HomeTeam_every: MatchWhereInput
-  _MagicalBackRelation_HomeTeam_some: MatchWhereInput
-  _MagicalBackRelation_HomeTeam_none: MatchWhereInput
 }
 
 input TeamWhereUniqueInput {
