@@ -1,10 +1,324 @@
-# import User from "./generated/prisma.graphql"
-# import Competition from "./generated/prisma.graphql"
-#
+# source: http://localhost:4000
+# timestamp: Mon Jul 30 2018 19:01:34 GMT+0000 (GMT)
 
-type fdCompetitions {
-  count: Int!
-  competitions: [fdCompetition!]!
+type Competition implements Node {
+  id: ID!
+  apiId: Int!
+  name: String!
+  area: String!
+  seasons(
+    where: SeasonWhereInput
+    orderBy: SeasonOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Season!]
+}
+
+input CompetitionCreateInput {
+  apiId: Int!
+  name: String!
+  area: String!
+  seasons: SeasonCreateManyWithoutCompetitionInput
+}
+
+input CompetitionCreateOneWithoutSeasonsInput {
+  create: CompetitionCreateWithoutSeasonsInput
+  connect: CompetitionWhereUniqueInput
+}
+
+input CompetitionCreateWithoutSeasonsInput {
+  apiId: Int!
+  name: String!
+  area: String!
+}
+
+enum CompetitionOrderByInput {
+  id_ASC
+  id_DESC
+  apiId_ASC
+  apiId_DESC
+  name_ASC
+  name_DESC
+  area_ASC
+  area_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+input CompetitionUpdateInput {
+  apiId: Int
+  name: String
+  area: String
+  seasons: SeasonUpdateManyWithoutCompetitionInput
+}
+
+input CompetitionWhereInput {
+  """
+  Logical AND on all given filters.
+  """
+  AND: [CompetitionWhereInput!]
+
+  """
+  Logical OR on all given filters.
+  """
+  OR: [CompetitionWhereInput!]
+
+  """
+  Logical NOT on all given filters combined by AND.
+  """
+  NOT: [CompetitionWhereInput!]
+  id: ID
+
+  """
+  All values that are not equal to given value.
+  """
+  id_not: ID
+
+  """
+  All values that are contained in given list.
+  """
+  id_in: [ID!]
+
+  """
+  All values that are not contained in given list.
+  """
+  id_not_in: [ID!]
+
+  """
+  All values less than the given value.
+  """
+  id_lt: ID
+
+  """
+  All values less than or equal the given value.
+  """
+  id_lte: ID
+
+  """
+  All values greater than the given value.
+  """
+  id_gt: ID
+
+  """
+  All values greater than or equal the given value.
+  """
+  id_gte: ID
+
+  """
+  All values containing the given string.
+  """
+  id_contains: ID
+
+  """
+  All values not containing the given string.
+  """
+  id_not_contains: ID
+
+  """
+  All values starting with the given string.
+  """
+  id_starts_with: ID
+
+  """
+  All values not starting with the given string.
+  """
+  id_not_starts_with: ID
+
+  """
+  All values ending with the given string.
+  """
+  id_ends_with: ID
+
+  """
+  All values not ending with the given string.
+  """
+  id_not_ends_with: ID
+  apiId: Int
+
+  """
+  All values that are not equal to given value.
+  """
+  apiId_not: Int
+
+  """
+  All values that are contained in given list.
+  """
+  apiId_in: [Int!]
+
+  """
+  All values that are not contained in given list.
+  """
+  apiId_not_in: [Int!]
+
+  """
+  All values less than the given value.
+  """
+  apiId_lt: Int
+
+  """
+  All values less than or equal the given value.
+  """
+  apiId_lte: Int
+
+  """
+  All values greater than the given value.
+  """
+  apiId_gt: Int
+
+  """
+  All values greater than or equal the given value.
+  """
+  apiId_gte: Int
+  name: String
+
+  """
+  All values that are not equal to given value.
+  """
+  name_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  name_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  name_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  name_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  name_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  name_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  name_gte: String
+
+  """
+  All values containing the given string.
+  """
+  name_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  name_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  name_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  name_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  name_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  name_not_ends_with: String
+  area: String
+
+  """
+  All values that are not equal to given value.
+  """
+  area_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  area_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  area_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  area_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  area_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  area_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  area_gte: String
+
+  """
+  All values containing the given string.
+  """
+  area_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  area_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  area_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  area_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  area_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  area_not_ends_with: String
+  seasons_every: SeasonWhereInput
+  seasons_some: SeasonWhereInput
+  seasons_none: SeasonWhereInput
+}
+
+input CompetitionWhereUniqueInput {
+  id: ID
+  apiId: Int
+}
+
+type fdArea {
+  id: Int!
+  name: String!
 }
 
 type fdCompetition {
@@ -17,22 +331,14 @@ type fdCompetition {
   seasons: [fdSeason]
 }
 
-type fdArea {
-  id: Int!
-  name: String!
-}
-
-type fdSeason {
-  id: Int!
-  startDate: String
-  endDate: String
-  currentMatchday: Int
-}
-
-type fdMatches {
+type fdCompetitions {
   count: Int!
-  competition: fdCompetition
-  matches: [fdMatch!]!
+  competitions: [fdCompetition!]!
+}
+
+type fdGoals {
+  homeTeam: Int
+  awayTeam: Int
 }
 
 type fdMatch {
@@ -49,9 +355,10 @@ type fdMatch {
   score: fdScore!
 }
 
-type fdTeam {
-  id: Int!
-  name: String!
+type fdMatches {
+  count: Int!
+  competition: fdCompetition
+  matches: [fdMatch!]!
 }
 
 type fdScore {
@@ -63,9 +370,1975 @@ type fdScore {
   penalties: fdGoals
 }
 
-type fdGoals {
-  homeTeam: Int
-  awayTeam: Int
+type fdSeason {
+  id: Int!
+  startDate: String
+  endDate: String
+  currentMatchday: Int
+}
+
+type fdTeam {
+  id: Int!
+  name: String!
+}
+
+type League implements Node {
+  id: ID!
+  name: String!
+  subs(
+    where: LeagueSubscriptionWhereInput
+    orderBy: LeagueSubscriptionOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [LeagueSubscription!]
+}
+
+input LeagueCreateOneWithoutSubsInput {
+  create: LeagueCreateWithoutSubsInput
+  connect: LeagueWhereUniqueInput
+}
+
+input LeagueCreateWithoutSubsInput {
+  name: String!
+}
+
+type LeagueSubscription implements Node {
+  id: ID!
+  league(where: LeagueWhereInput): League!
+  users(
+    where: UserWhereInput
+    orderBy: UserOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [User!]
+}
+
+input LeagueSubscriptionCreateInput {
+  league: LeagueCreateOneWithoutSubsInput!
+  users: UserCreateManyWithoutSubsInput
+}
+
+input LeagueSubscriptionCreateManyWithoutUsersInput {
+  create: [LeagueSubscriptionCreateWithoutUsersInput!]
+  connect: [LeagueSubscriptionWhereUniqueInput!]
+}
+
+input LeagueSubscriptionCreateOneInput {
+  create: LeagueSubscriptionCreateInput
+  connect: LeagueSubscriptionWhereUniqueInput
+}
+
+input LeagueSubscriptionCreateWithoutUsersInput {
+  league: LeagueCreateOneWithoutSubsInput!
+}
+
+enum LeagueSubscriptionOrderByInput {
+  id_ASC
+  id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+input LeagueSubscriptionWhereInput {
+  """
+  Logical AND on all given filters.
+  """
+  AND: [LeagueSubscriptionWhereInput!]
+
+  """
+  Logical OR on all given filters.
+  """
+  OR: [LeagueSubscriptionWhereInput!]
+
+  """
+  Logical NOT on all given filters combined by AND.
+  """
+  NOT: [LeagueSubscriptionWhereInput!]
+  id: ID
+
+  """
+  All values that are not equal to given value.
+  """
+  id_not: ID
+
+  """
+  All values that are contained in given list.
+  """
+  id_in: [ID!]
+
+  """
+  All values that are not contained in given list.
+  """
+  id_not_in: [ID!]
+
+  """
+  All values less than the given value.
+  """
+  id_lt: ID
+
+  """
+  All values less than or equal the given value.
+  """
+  id_lte: ID
+
+  """
+  All values greater than the given value.
+  """
+  id_gt: ID
+
+  """
+  All values greater than or equal the given value.
+  """
+  id_gte: ID
+
+  """
+  All values containing the given string.
+  """
+  id_contains: ID
+
+  """
+  All values not containing the given string.
+  """
+  id_not_contains: ID
+
+  """
+  All values starting with the given string.
+  """
+  id_starts_with: ID
+
+  """
+  All values not starting with the given string.
+  """
+  id_not_starts_with: ID
+
+  """
+  All values ending with the given string.
+  """
+  id_ends_with: ID
+
+  """
+  All values not ending with the given string.
+  """
+  id_not_ends_with: ID
+  league: LeagueWhereInput
+  users_every: UserWhereInput
+  users_some: UserWhereInput
+  users_none: UserWhereInput
+  _MagicalBackRelation_LeagueSubscriptionToPick_every: PickWhereInput
+  _MagicalBackRelation_LeagueSubscriptionToPick_some: PickWhereInput
+  _MagicalBackRelation_LeagueSubscriptionToPick_none: PickWhereInput
+}
+
+input LeagueSubscriptionWhereUniqueInput {
+  id: ID
+}
+
+input LeagueWhereInput {
+  """
+  Logical AND on all given filters.
+  """
+  AND: [LeagueWhereInput!]
+
+  """
+  Logical OR on all given filters.
+  """
+  OR: [LeagueWhereInput!]
+
+  """
+  Logical NOT on all given filters combined by AND.
+  """
+  NOT: [LeagueWhereInput!]
+  id: ID
+
+  """
+  All values that are not equal to given value.
+  """
+  id_not: ID
+
+  """
+  All values that are contained in given list.
+  """
+  id_in: [ID!]
+
+  """
+  All values that are not contained in given list.
+  """
+  id_not_in: [ID!]
+
+  """
+  All values less than the given value.
+  """
+  id_lt: ID
+
+  """
+  All values less than or equal the given value.
+  """
+  id_lte: ID
+
+  """
+  All values greater than the given value.
+  """
+  id_gt: ID
+
+  """
+  All values greater than or equal the given value.
+  """
+  id_gte: ID
+
+  """
+  All values containing the given string.
+  """
+  id_contains: ID
+
+  """
+  All values not containing the given string.
+  """
+  id_not_contains: ID
+
+  """
+  All values starting with the given string.
+  """
+  id_starts_with: ID
+
+  """
+  All values not starting with the given string.
+  """
+  id_not_starts_with: ID
+
+  """
+  All values ending with the given string.
+  """
+  id_ends_with: ID
+
+  """
+  All values not ending with the given string.
+  """
+  id_not_ends_with: ID
+  name: String
+
+  """
+  All values that are not equal to given value.
+  """
+  name_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  name_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  name_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  name_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  name_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  name_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  name_gte: String
+
+  """
+  All values containing the given string.
+  """
+  name_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  name_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  name_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  name_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  name_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  name_not_ends_with: String
+  subs_every: LeagueSubscriptionWhereInput
+  subs_some: LeagueSubscriptionWhereInput
+  subs_none: LeagueSubscriptionWhereInput
+}
+
+input LeagueWhereUniqueInput {
+  id: ID
+}
+
+type Match implements Node {
+  id: ID!
+  apiId: Int!
+  utcDate: String!
+  matchday: Int!
+  stage: String!
+  group: String!
+  status: String!
+  lastUpdated: String
+  homeTeam(where: TeamWhereInput): Team!
+  awayTeam(where: TeamWhereInput): Team!
+  season(where: SeasonWhereInput): Season!
+  winner: String
+  duration: String
+  fullTimeHome: Int
+  fullTimeAway: Int
+  halfTimeHome: Int
+  halfTimeAway: Int
+  extraTimeHome: Int
+  extraTimeAway: Int
+  penaltiesHome: Int
+  penaltiesAway: Int
+}
+
+input TeamWhereInput {
+  """
+  Logical AND on all given filters.
+  """
+  AND: [TeamWhereInput!]
+
+  """
+  Logical OR on all given filters.
+  """
+  OR: [TeamWhereInput!]
+
+  """
+  Logical NOT on all given filters combined by AND.
+  """
+  NOT: [TeamWhereInput!]
+  id: ID
+
+  """
+  All values that are not equal to given value.
+  """
+  id_not: ID
+
+  """
+  All values that are contained in given list.
+  """
+  id_in: [ID!]
+
+  """
+  All values that are not contained in given list.
+  """
+  id_not_in: [ID!]
+
+  """
+  All values less than the given value.
+  """
+  id_lt: ID
+
+  """
+  All values less than or equal the given value.
+  """
+  id_lte: ID
+
+  """
+  All values greater than the given value.
+  """
+  id_gt: ID
+
+  """
+  All values greater than or equal the given value.
+  """
+  id_gte: ID
+
+  """
+  All values containing the given string.
+  """
+  id_contains: ID
+
+  """
+  All values not containing the given string.
+  """
+  id_not_contains: ID
+
+  """
+  All values starting with the given string.
+  """
+  id_starts_with: ID
+
+  """
+  All values not starting with the given string.
+  """
+  id_not_starts_with: ID
+
+  """
+  All values ending with the given string.
+  """
+  id_ends_with: ID
+
+  """
+  All values not ending with the given string.
+  """
+  id_not_ends_with: ID
+  apiId: Int
+
+  """
+  All values that are not equal to given value.
+  """
+  apiId_not: Int
+
+  """
+  All values that are contained in given list.
+  """
+  apiId_in: [Int!]
+
+  """
+  All values that are not contained in given list.
+  """
+  apiId_not_in: [Int!]
+
+  """
+  All values less than the given value.
+  """
+  apiId_lt: Int
+
+  """
+  All values less than or equal the given value.
+  """
+  apiId_lte: Int
+
+  """
+  All values greater than the given value.
+  """
+  apiId_gt: Int
+
+  """
+  All values greater than or equal the given value.
+  """
+  apiId_gte: Int
+  name: String
+
+  """
+  All values that are not equal to given value.
+  """
+  name_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  name_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  name_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  name_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  name_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  name_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  name_gte: String
+
+  """
+  All values containing the given string.
+  """
+  name_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  name_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  name_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  name_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  name_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  name_not_ends_with: String
+  _MagicalBackRelation_PickedTeam_every: PickWhereInput
+  _MagicalBackRelation_PickedTeam_some: PickWhereInput
+  _MagicalBackRelation_PickedTeam_none: PickWhereInput
+  _MagicalBackRelation_AwayTeam_every: MatchWhereInput
+  _MagicalBackRelation_AwayTeam_some: MatchWhereInput
+  _MagicalBackRelation_AwayTeam_none: MatchWhereInput
+  _MagicalBackRelation_HomeTeam_every: MatchWhereInput
+  _MagicalBackRelation_HomeTeam_some: MatchWhereInput
+  _MagicalBackRelation_HomeTeam_none: MatchWhereInput
+}
+
+input MatchCreateInput {
+  apiId: Int!
+  utcDate: String!
+  matchday: Int!
+  stage: String!
+  group: String!
+  status: String!
+  lastUpdated: String
+  homeTeam: String!
+  awayTeam: String!
+  winner: String
+  duration: String
+  fullTimeHome: Int
+  fullTimeAway: Int
+  halfTimeHome: Int
+  halfTimeAway: Int
+  extraTimeHome: Int
+  extraTimeAway: Int
+  penaltiesHome: Int
+  penaltiesAway: Int
+  season: SeasonCreateOneWithoutMatchesInput!
+}
+
+input MatchCreateManyWithoutSeasonInput {
+  create: [MatchCreateWithoutSeasonInput!]
+  connect: [MatchWhereUniqueInput!]
+}
+
+input MatchCreateOneInput {
+  create: MatchCreateInput
+  connect: MatchWhereUniqueInput
+}
+
+input MatchCreateWithoutSeasonInput {
+  apiId: Int!
+  utcDate: String!
+  matchday: Int!
+  stage: String!
+  group: String!
+  status: String!
+  lastUpdated: String
+  homeTeam: String!
+  awayTeam: String!
+  winner: String
+  duration: String
+  fullTimeHome: Int
+  fullTimeAway: Int
+  halfTimeHome: Int
+  halfTimeAway: Int
+  extraTimeHome: Int
+  extraTimeAway: Int
+  penaltiesHome: Int
+  penaltiesAway: Int
+}
+
+enum MatchOrderByInput {
+  id_ASC
+  id_DESC
+  apiId_ASC
+  apiId_DESC
+  utcDate_ASC
+  utcDate_DESC
+  matchday_ASC
+  matchday_DESC
+  stage_ASC
+  stage_DESC
+  group_ASC
+  group_DESC
+  status_ASC
+  status_DESC
+  lastUpdated_ASC
+  lastUpdated_DESC
+  homeTeam_ASC
+  homeTeam_DESC
+  awayTeam_ASC
+  awayTeam_DESC
+  winner_ASC
+  winner_DESC
+  duration_ASC
+  duration_DESC
+  fullTimeHome_ASC
+  fullTimeHome_DESC
+  fullTimeAway_ASC
+  fullTimeAway_DESC
+  halfTimeHome_ASC
+  halfTimeHome_DESC
+  halfTimeAway_ASC
+  halfTimeAway_DESC
+  extraTimeHome_ASC
+  extraTimeHome_DESC
+  extraTimeAway_ASC
+  extraTimeAway_DESC
+  penaltiesHome_ASC
+  penaltiesHome_DESC
+  penaltiesAway_ASC
+  penaltiesAway_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+input MatchUpdateManyWithoutSeasonInput {
+  create: [MatchCreateWithoutSeasonInput!]
+  connect: [MatchWhereUniqueInput!]
+  disconnect: [MatchWhereUniqueInput!]
+  delete: [MatchWhereUniqueInput!]
+  update: [MatchUpdateWithWhereUniqueWithoutSeasonInput!]
+  upsert: [MatchUpsertWithWhereUniqueWithoutSeasonInput!]
+}
+
+input MatchUpdateWithoutSeasonDataInput {
+  apiId: Int
+  utcDate: String
+  matchday: Int
+  stage: String
+  group: String
+  status: String
+  lastUpdated: String
+  homeTeam: String
+  awayTeam: String
+  winner: String
+  duration: String
+  fullTimeHome: Int
+  fullTimeAway: Int
+  halfTimeHome: Int
+  halfTimeAway: Int
+  extraTimeHome: Int
+  extraTimeAway: Int
+  penaltiesHome: Int
+  penaltiesAway: Int
+}
+
+input MatchUpdateWithWhereUniqueWithoutSeasonInput {
+  where: MatchWhereUniqueInput!
+  data: MatchUpdateWithoutSeasonDataInput!
+}
+
+input MatchUpsertWithWhereUniqueWithoutSeasonInput {
+  where: MatchWhereUniqueInput!
+  update: MatchUpdateWithoutSeasonDataInput!
+  create: MatchCreateWithoutSeasonInput!
+}
+
+input MatchWhereInput {
+  """
+  Logical AND on all given filters.
+  """
+  AND: [MatchWhereInput!]
+
+  """
+  Logical OR on all given filters.
+  """
+  OR: [MatchWhereInput!]
+
+  """
+  Logical NOT on all given filters combined by AND.
+  """
+  NOT: [MatchWhereInput!]
+  id: ID
+
+  """
+  All values that are not equal to given value.
+  """
+  id_not: ID
+
+  """
+  All values that are contained in given list.
+  """
+  id_in: [ID!]
+
+  """
+  All values that are not contained in given list.
+  """
+  id_not_in: [ID!]
+
+  """
+  All values less than the given value.
+  """
+  id_lt: ID
+
+  """
+  All values less than or equal the given value.
+  """
+  id_lte: ID
+
+  """
+  All values greater than the given value.
+  """
+  id_gt: ID
+
+  """
+  All values greater than or equal the given value.
+  """
+  id_gte: ID
+
+  """
+  All values containing the given string.
+  """
+  id_contains: ID
+
+  """
+  All values not containing the given string.
+  """
+  id_not_contains: ID
+
+  """
+  All values starting with the given string.
+  """
+  id_starts_with: ID
+
+  """
+  All values not starting with the given string.
+  """
+  id_not_starts_with: ID
+
+  """
+  All values ending with the given string.
+  """
+  id_ends_with: ID
+
+  """
+  All values not ending with the given string.
+  """
+  id_not_ends_with: ID
+  apiId: Int
+
+  """
+  All values that are not equal to given value.
+  """
+  apiId_not: Int
+
+  """
+  All values that are contained in given list.
+  """
+  apiId_in: [Int!]
+
+  """
+  All values that are not contained in given list.
+  """
+  apiId_not_in: [Int!]
+
+  """
+  All values less than the given value.
+  """
+  apiId_lt: Int
+
+  """
+  All values less than or equal the given value.
+  """
+  apiId_lte: Int
+
+  """
+  All values greater than the given value.
+  """
+  apiId_gt: Int
+
+  """
+  All values greater than or equal the given value.
+  """
+  apiId_gte: Int
+  utcDate: String
+
+  """
+  All values that are not equal to given value.
+  """
+  utcDate_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  utcDate_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  utcDate_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  utcDate_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  utcDate_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  utcDate_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  utcDate_gte: String
+
+  """
+  All values containing the given string.
+  """
+  utcDate_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  utcDate_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  utcDate_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  utcDate_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  utcDate_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  utcDate_not_ends_with: String
+  matchday: Int
+
+  """
+  All values that are not equal to given value.
+  """
+  matchday_not: Int
+
+  """
+  All values that are contained in given list.
+  """
+  matchday_in: [Int!]
+
+  """
+  All values that are not contained in given list.
+  """
+  matchday_not_in: [Int!]
+
+  """
+  All values less than the given value.
+  """
+  matchday_lt: Int
+
+  """
+  All values less than or equal the given value.
+  """
+  matchday_lte: Int
+
+  """
+  All values greater than the given value.
+  """
+  matchday_gt: Int
+
+  """
+  All values greater than or equal the given value.
+  """
+  matchday_gte: Int
+  stage: String
+
+  """
+  All values that are not equal to given value.
+  """
+  stage_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  stage_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  stage_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  stage_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  stage_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  stage_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  stage_gte: String
+
+  """
+  All values containing the given string.
+  """
+  stage_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  stage_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  stage_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  stage_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  stage_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  stage_not_ends_with: String
+  group: String
+
+  """
+  All values that are not equal to given value.
+  """
+  group_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  group_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  group_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  group_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  group_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  group_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  group_gte: String
+
+  """
+  All values containing the given string.
+  """
+  group_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  group_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  group_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  group_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  group_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  group_not_ends_with: String
+  status: String
+
+  """
+  All values that are not equal to given value.
+  """
+  status_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  status_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  status_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  status_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  status_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  status_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  status_gte: String
+
+  """
+  All values containing the given string.
+  """
+  status_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  status_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  status_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  status_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  status_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  status_not_ends_with: String
+  lastUpdated: String
+
+  """
+  All values that are not equal to given value.
+  """
+  lastUpdated_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  lastUpdated_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  lastUpdated_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  lastUpdated_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  lastUpdated_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  lastUpdated_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  lastUpdated_gte: String
+
+  """
+  All values containing the given string.
+  """
+  lastUpdated_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  lastUpdated_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  lastUpdated_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  lastUpdated_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  lastUpdated_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  lastUpdated_not_ends_with: String
+  homeTeam: String
+
+  """
+  All values that are not equal to given value.
+  """
+  homeTeam_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  homeTeam_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  homeTeam_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  homeTeam_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  homeTeam_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  homeTeam_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  homeTeam_gte: String
+
+  """
+  All values containing the given string.
+  """
+  homeTeam_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  homeTeam_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  homeTeam_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  homeTeam_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  homeTeam_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  homeTeam_not_ends_with: String
+  awayTeam: String
+
+  """
+  All values that are not equal to given value.
+  """
+  awayTeam_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  awayTeam_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  awayTeam_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  awayTeam_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  awayTeam_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  awayTeam_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  awayTeam_gte: String
+
+  """
+  All values containing the given string.
+  """
+  awayTeam_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  awayTeam_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  awayTeam_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  awayTeam_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  awayTeam_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  awayTeam_not_ends_with: String
+  winner: String
+
+  """
+  All values that are not equal to given value.
+  """
+  winner_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  winner_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  winner_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  winner_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  winner_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  winner_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  winner_gte: String
+
+  """
+  All values containing the given string.
+  """
+  winner_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  winner_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  winner_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  winner_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  winner_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  winner_not_ends_with: String
+  duration: String
+
+  """
+  All values that are not equal to given value.
+  """
+  duration_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  duration_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  duration_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  duration_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  duration_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  duration_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  duration_gte: String
+
+  """
+  All values containing the given string.
+  """
+  duration_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  duration_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  duration_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  duration_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  duration_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  duration_not_ends_with: String
+  fullTimeHome: Int
+
+  """
+  All values that are not equal to given value.
+  """
+  fullTimeHome_not: Int
+
+  """
+  All values that are contained in given list.
+  """
+  fullTimeHome_in: [Int!]
+
+  """
+  All values that are not contained in given list.
+  """
+  fullTimeHome_not_in: [Int!]
+
+  """
+  All values less than the given value.
+  """
+  fullTimeHome_lt: Int
+
+  """
+  All values less than or equal the given value.
+  """
+  fullTimeHome_lte: Int
+
+  """
+  All values greater than the given value.
+  """
+  fullTimeHome_gt: Int
+
+  """
+  All values greater than or equal the given value.
+  """
+  fullTimeHome_gte: Int
+  fullTimeAway: Int
+
+  """
+  All values that are not equal to given value.
+  """
+  fullTimeAway_not: Int
+
+  """
+  All values that are contained in given list.
+  """
+  fullTimeAway_in: [Int!]
+
+  """
+  All values that are not contained in given list.
+  """
+  fullTimeAway_not_in: [Int!]
+
+  """
+  All values less than the given value.
+  """
+  fullTimeAway_lt: Int
+
+  """
+  All values less than or equal the given value.
+  """
+  fullTimeAway_lte: Int
+
+  """
+  All values greater than the given value.
+  """
+  fullTimeAway_gt: Int
+
+  """
+  All values greater than or equal the given value.
+  """
+  fullTimeAway_gte: Int
+  halfTimeHome: Int
+
+  """
+  All values that are not equal to given value.
+  """
+  halfTimeHome_not: Int
+
+  """
+  All values that are contained in given list.
+  """
+  halfTimeHome_in: [Int!]
+
+  """
+  All values that are not contained in given list.
+  """
+  halfTimeHome_not_in: [Int!]
+
+  """
+  All values less than the given value.
+  """
+  halfTimeHome_lt: Int
+
+  """
+  All values less than or equal the given value.
+  """
+  halfTimeHome_lte: Int
+
+  """
+  All values greater than the given value.
+  """
+  halfTimeHome_gt: Int
+
+  """
+  All values greater than or equal the given value.
+  """
+  halfTimeHome_gte: Int
+  halfTimeAway: Int
+
+  """
+  All values that are not equal to given value.
+  """
+  halfTimeAway_not: Int
+
+  """
+  All values that are contained in given list.
+  """
+  halfTimeAway_in: [Int!]
+
+  """
+  All values that are not contained in given list.
+  """
+  halfTimeAway_not_in: [Int!]
+
+  """
+  All values less than the given value.
+  """
+  halfTimeAway_lt: Int
+
+  """
+  All values less than or equal the given value.
+  """
+  halfTimeAway_lte: Int
+
+  """
+  All values greater than the given value.
+  """
+  halfTimeAway_gt: Int
+
+  """
+  All values greater than or equal the given value.
+  """
+  halfTimeAway_gte: Int
+  extraTimeHome: Int
+
+  """
+  All values that are not equal to given value.
+  """
+  extraTimeHome_not: Int
+
+  """
+  All values that are contained in given list.
+  """
+  extraTimeHome_in: [Int!]
+
+  """
+  All values that are not contained in given list.
+  """
+  extraTimeHome_not_in: [Int!]
+
+  """
+  All values less than the given value.
+  """
+  extraTimeHome_lt: Int
+
+  """
+  All values less than or equal the given value.
+  """
+  extraTimeHome_lte: Int
+
+  """
+  All values greater than the given value.
+  """
+  extraTimeHome_gt: Int
+
+  """
+  All values greater than or equal the given value.
+  """
+  extraTimeHome_gte: Int
+  extraTimeAway: Int
+
+  """
+  All values that are not equal to given value.
+  """
+  extraTimeAway_not: Int
+
+  """
+  All values that are contained in given list.
+  """
+  extraTimeAway_in: [Int!]
+
+  """
+  All values that are not contained in given list.
+  """
+  extraTimeAway_not_in: [Int!]
+
+  """
+  All values less than the given value.
+  """
+  extraTimeAway_lt: Int
+
+  """
+  All values less than or equal the given value.
+  """
+  extraTimeAway_lte: Int
+
+  """
+  All values greater than the given value.
+  """
+  extraTimeAway_gt: Int
+
+  """
+  All values greater than or equal the given value.
+  """
+  extraTimeAway_gte: Int
+  penaltiesHome: Int
+
+  """
+  All values that are not equal to given value.
+  """
+  penaltiesHome_not: Int
+
+  """
+  All values that are contained in given list.
+  """
+  penaltiesHome_in: [Int!]
+
+  """
+  All values that are not contained in given list.
+  """
+  penaltiesHome_not_in: [Int!]
+
+  """
+  All values less than the given value.
+  """
+  penaltiesHome_lt: Int
+
+  """
+  All values less than or equal the given value.
+  """
+  penaltiesHome_lte: Int
+
+  """
+  All values greater than the given value.
+  """
+  penaltiesHome_gt: Int
+
+  """
+  All values greater than or equal the given value.
+  """
+  penaltiesHome_gte: Int
+  penaltiesAway: Int
+
+  """
+  All values that are not equal to given value.
+  """
+  penaltiesAway_not: Int
+
+  """
+  All values that are contained in given list.
+  """
+  penaltiesAway_in: [Int!]
+
+  """
+  All values that are not contained in given list.
+  """
+  penaltiesAway_not_in: [Int!]
+
+  """
+  All values less than the given value.
+  """
+  penaltiesAway_lt: Int
+
+  """
+  All values less than or equal the given value.
+  """
+  penaltiesAway_lte: Int
+
+  """
+  All values greater than the given value.
+  """
+  penaltiesAway_gt: Int
+
+  """
+  All values greater than or equal the given value.
+  """
+  penaltiesAway_gte: Int
+  season: SeasonWhereInput
+  _MagicalBackRelation_MatchToPick_every: PickWhereInput
+  _MagicalBackRelation_MatchToPick_some: PickWhereInput
+  _MagicalBackRelation_MatchToPick_none: PickWhereInput
+}
+
+input MatchWhereUniqueInput {
+  id: ID
+  apiId: Int
+}
+
+type Mutation {
+  createPick(data: PickCreateInput!): Pick!
+  deletePick(where: PickWhereUniqueInput!): Pick
+  upsertCompetition(
+    where: CompetitionWhereUniqueInput!
+    create: CompetitionCreateInput!
+    update: CompetitionUpdateInput!
+  ): Competition!
+  createCompetition(data: CompetitionCreateInput!): Competition!
+}
+
+"""
+An object with an ID
+"""
+interface Node {
+  """
+  The id of the object.
+  """
+  id: ID!
+}
+
+type Pick implements Node {
+  id: ID!
+  team: String!
+  success: Boolean!
+  resolved: Boolean!
+  match(where: MatchWhereInput): Match!
+  user(where: UserWhereInput): User!
+  leagueSubscription(where: LeagueSubscriptionWhereInput): LeagueSubscription!
+}
+
+input PickCreateInput {
+  team: String!
+  success: Boolean
+  resolved: Boolean
+  match: MatchCreateOneInput!
+  user: UserCreateOneWithoutPicksInput!
+  leagueSubscription: LeagueSubscriptionCreateOneInput!
+}
+
+input PickCreateManyWithoutUserInput {
+  create: [PickCreateWithoutUserInput!]
+  connect: [PickWhereUniqueInput!]
+}
+
+input PickCreateWithoutUserInput {
+  team: String!
+  success: Boolean
+  resolved: Boolean
+  match: MatchCreateOneInput!
+  leagueSubscription: LeagueSubscriptionCreateOneInput!
+}
+
+enum PickOrderByInput {
+  id_ASC
+  id_DESC
+  team_ASC
+  team_DESC
+  success_ASC
+  success_DESC
+  resolved_ASC
+  resolved_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+input PickWhereInput {
+  """
+  Logical AND on all given filters.
+  """
+  AND: [PickWhereInput!]
+
+  """
+  Logical OR on all given filters.
+  """
+  OR: [PickWhereInput!]
+
+  """
+  Logical NOT on all given filters combined by AND.
+  """
+  NOT: [PickWhereInput!]
+  id: ID
+
+  """
+  All values that are not equal to given value.
+  """
+  id_not: ID
+
+  """
+  All values that are contained in given list.
+  """
+  id_in: [ID!]
+
+  """
+  All values that are not contained in given list.
+  """
+  id_not_in: [ID!]
+
+  """
+  All values less than the given value.
+  """
+  id_lt: ID
+
+  """
+  All values less than or equal the given value.
+  """
+  id_lte: ID
+
+  """
+  All values greater than the given value.
+  """
+  id_gt: ID
+
+  """
+  All values greater than or equal the given value.
+  """
+  id_gte: ID
+
+  """
+  All values containing the given string.
+  """
+  id_contains: ID
+
+  """
+  All values not containing the given string.
+  """
+  id_not_contains: ID
+
+  """
+  All values starting with the given string.
+  """
+  id_starts_with: ID
+
+  """
+  All values not starting with the given string.
+  """
+  id_not_starts_with: ID
+
+  """
+  All values ending with the given string.
+  """
+  id_ends_with: ID
+
+  """
+  All values not ending with the given string.
+  """
+  id_not_ends_with: ID
+  team: String
+
+  """
+  All values that are not equal to given value.
+  """
+  team_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  team_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  team_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  team_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  team_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  team_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  team_gte: String
+
+  """
+  All values containing the given string.
+  """
+  team_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  team_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  team_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  team_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  team_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  team_not_ends_with: String
+  success: Boolean
+
+  """
+  All values that are not equal to given value.
+  """
+  success_not: Boolean
+  resolved: Boolean
+
+  """
+  All values that are not equal to given value.
+  """
+  resolved_not: Boolean
+  match: MatchWhereInput
+  user: UserWhereInput
+  leagueSubscription: LeagueSubscriptionWhereInput
+}
+
+input PickWhereUniqueInput {
+  id: ID
 }
 
 type Query {
@@ -95,12 +2368,606 @@ type Query {
   fd_matches(competitionId: Int!): fdMatches
 }
 
-type Mutation {
-  createPick(data: PickCreateInput!): Pick!
-  deletePick(where: PickWhereUniqueInput!): Pick
-  upsertCompetition(
-    where: CompetitionWhereUniqueInput!
-    create: CompetitionCreateInput!
-    update: CompetitionUpdateInput!
-  ): Competition!
+type Season implements Node {
+  id: ID!
+  apiId: Int!
+  startDate: String!
+  endDate: String!
+  currentMatchday: Int
+  competition(where: CompetitionWhereInput): Competition!
+  matches(
+    where: MatchWhereInput
+    orderBy: MatchOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Match!]
+}
+
+input SeasonCreateManyWithoutCompetitionInput {
+  create: [SeasonCreateWithoutCompetitionInput!]
+  connect: [SeasonWhereUniqueInput!]
+}
+
+input SeasonCreateOneWithoutMatchesInput {
+  create: SeasonCreateWithoutMatchesInput
+  connect: SeasonWhereUniqueInput
+}
+
+input SeasonCreateWithoutCompetitionInput {
+  apiId: Int!
+  startDate: String!
+  endDate: String!
+  currentMatchday: Int
+  matches: MatchCreateManyWithoutSeasonInput
+}
+
+input SeasonCreateWithoutMatchesInput {
+  apiId: Int!
+  startDate: String!
+  endDate: String!
+  currentMatchday: Int
+  competition: CompetitionCreateOneWithoutSeasonsInput!
+}
+
+enum SeasonOrderByInput {
+  id_ASC
+  id_DESC
+  apiId_ASC
+  apiId_DESC
+  startDate_ASC
+  startDate_DESC
+  endDate_ASC
+  endDate_DESC
+  currentMatchday_ASC
+  currentMatchday_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+input SeasonUpdateManyWithoutCompetitionInput {
+  create: [SeasonCreateWithoutCompetitionInput!]
+  connect: [SeasonWhereUniqueInput!]
+  disconnect: [SeasonWhereUniqueInput!]
+  delete: [SeasonWhereUniqueInput!]
+  update: [SeasonUpdateWithWhereUniqueWithoutCompetitionInput!]
+  upsert: [SeasonUpsertWithWhereUniqueWithoutCompetitionInput!]
+}
+
+input SeasonUpdateWithoutCompetitionDataInput {
+  apiId: Int
+  startDate: String
+  endDate: String
+  currentMatchday: Int
+  matches: MatchUpdateManyWithoutSeasonInput
+}
+
+input SeasonUpdateWithWhereUniqueWithoutCompetitionInput {
+  where: SeasonWhereUniqueInput!
+  data: SeasonUpdateWithoutCompetitionDataInput!
+}
+
+input SeasonUpsertWithWhereUniqueWithoutCompetitionInput {
+  where: SeasonWhereUniqueInput!
+  update: SeasonUpdateWithoutCompetitionDataInput!
+  create: SeasonCreateWithoutCompetitionInput!
+}
+
+input SeasonWhereInput {
+  """
+  Logical AND on all given filters.
+  """
+  AND: [SeasonWhereInput!]
+
+  """
+  Logical OR on all given filters.
+  """
+  OR: [SeasonWhereInput!]
+
+  """
+  Logical NOT on all given filters combined by AND.
+  """
+  NOT: [SeasonWhereInput!]
+  id: ID
+
+  """
+  All values that are not equal to given value.
+  """
+  id_not: ID
+
+  """
+  All values that are contained in given list.
+  """
+  id_in: [ID!]
+
+  """
+  All values that are not contained in given list.
+  """
+  id_not_in: [ID!]
+
+  """
+  All values less than the given value.
+  """
+  id_lt: ID
+
+  """
+  All values less than or equal the given value.
+  """
+  id_lte: ID
+
+  """
+  All values greater than the given value.
+  """
+  id_gt: ID
+
+  """
+  All values greater than or equal the given value.
+  """
+  id_gte: ID
+
+  """
+  All values containing the given string.
+  """
+  id_contains: ID
+
+  """
+  All values not containing the given string.
+  """
+  id_not_contains: ID
+
+  """
+  All values starting with the given string.
+  """
+  id_starts_with: ID
+
+  """
+  All values not starting with the given string.
+  """
+  id_not_starts_with: ID
+
+  """
+  All values ending with the given string.
+  """
+  id_ends_with: ID
+
+  """
+  All values not ending with the given string.
+  """
+  id_not_ends_with: ID
+  apiId: Int
+
+  """
+  All values that are not equal to given value.
+  """
+  apiId_not: Int
+
+  """
+  All values that are contained in given list.
+  """
+  apiId_in: [Int!]
+
+  """
+  All values that are not contained in given list.
+  """
+  apiId_not_in: [Int!]
+
+  """
+  All values less than the given value.
+  """
+  apiId_lt: Int
+
+  """
+  All values less than or equal the given value.
+  """
+  apiId_lte: Int
+
+  """
+  All values greater than the given value.
+  """
+  apiId_gt: Int
+
+  """
+  All values greater than or equal the given value.
+  """
+  apiId_gte: Int
+  startDate: String
+
+  """
+  All values that are not equal to given value.
+  """
+  startDate_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  startDate_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  startDate_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  startDate_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  startDate_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  startDate_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  startDate_gte: String
+
+  """
+  All values containing the given string.
+  """
+  startDate_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  startDate_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  startDate_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  startDate_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  startDate_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  startDate_not_ends_with: String
+  endDate: String
+
+  """
+  All values that are not equal to given value.
+  """
+  endDate_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  endDate_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  endDate_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  endDate_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  endDate_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  endDate_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  endDate_gte: String
+
+  """
+  All values containing the given string.
+  """
+  endDate_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  endDate_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  endDate_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  endDate_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  endDate_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  endDate_not_ends_with: String
+  currentMatchday: Int
+
+  """
+  All values that are not equal to given value.
+  """
+  currentMatchday_not: Int
+
+  """
+  All values that are contained in given list.
+  """
+  currentMatchday_in: [Int!]
+
+  """
+  All values that are not contained in given list.
+  """
+  currentMatchday_not_in: [Int!]
+
+  """
+  All values less than the given value.
+  """
+  currentMatchday_lt: Int
+
+  """
+  All values less than or equal the given value.
+  """
+  currentMatchday_lte: Int
+
+  """
+  All values greater than the given value.
+  """
+  currentMatchday_gt: Int
+
+  """
+  All values greater than or equal the given value.
+  """
+  currentMatchday_gte: Int
+  competition: CompetitionWhereInput
+  matches_every: MatchWhereInput
+  matches_some: MatchWhereInput
+  matches_none: MatchWhereInput
+}
+
+input SeasonWhereUniqueInput {
+  id: ID
+  apiId: Int
+}
+
+type Team implements Node {
+  id: ID!
+  apiId: Int!
+  name: String!
+}
+
+type User implements Node {
+  id: ID!
+  name: String!
+  picks(
+    where: PickWhereInput
+    orderBy: PickOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Pick!]
+  subs(
+    where: LeagueSubscriptionWhereInput
+    orderBy: LeagueSubscriptionOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [LeagueSubscription!]
+}
+
+input UserCreateManyWithoutSubsInput {
+  create: [UserCreateWithoutSubsInput!]
+  connect: [UserWhereUniqueInput!]
+}
+
+input UserCreateOneWithoutPicksInput {
+  create: UserCreateWithoutPicksInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutPicksInput {
+  name: String!
+  subs: LeagueSubscriptionCreateManyWithoutUsersInput
+}
+
+input UserCreateWithoutSubsInput {
+  name: String!
+  picks: PickCreateManyWithoutUserInput
+}
+
+enum UserOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+input UserWhereInput {
+  """
+  Logical AND on all given filters.
+  """
+  AND: [UserWhereInput!]
+
+  """
+  Logical OR on all given filters.
+  """
+  OR: [UserWhereInput!]
+
+  """
+  Logical NOT on all given filters combined by AND.
+  """
+  NOT: [UserWhereInput!]
+  id: ID
+
+  """
+  All values that are not equal to given value.
+  """
+  id_not: ID
+
+  """
+  All values that are contained in given list.
+  """
+  id_in: [ID!]
+
+  """
+  All values that are not contained in given list.
+  """
+  id_not_in: [ID!]
+
+  """
+  All values less than the given value.
+  """
+  id_lt: ID
+
+  """
+  All values less than or equal the given value.
+  """
+  id_lte: ID
+
+  """
+  All values greater than the given value.
+  """
+  id_gt: ID
+
+  """
+  All values greater than or equal the given value.
+  """
+  id_gte: ID
+
+  """
+  All values containing the given string.
+  """
+  id_contains: ID
+
+  """
+  All values not containing the given string.
+  """
+  id_not_contains: ID
+
+  """
+  All values starting with the given string.
+  """
+  id_starts_with: ID
+
+  """
+  All values not starting with the given string.
+  """
+  id_not_starts_with: ID
+
+  """
+  All values ending with the given string.
+  """
+  id_ends_with: ID
+
+  """
+  All values not ending with the given string.
+  """
+  id_not_ends_with: ID
+  name: String
+
+  """
+  All values that are not equal to given value.
+  """
+  name_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  name_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  name_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  name_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  name_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  name_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  name_gte: String
+
+  """
+  All values containing the given string.
+  """
+  name_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  name_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  name_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  name_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  name_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  name_not_ends_with: String
+  picks_every: PickWhereInput
+  picks_some: PickWhereInput
+  picks_none: PickWhereInput
+  subs_every: LeagueSubscriptionWhereInput
+  subs_some: LeagueSubscriptionWhereInput
+  subs_none: LeagueSubscriptionWhereInput
+}
+
+input UserWhereUniqueInput {
+  id: ID
 }

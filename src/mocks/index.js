@@ -91,21 +91,29 @@ const mocks = {
     //   },
   }),
   Mutation: () => ({
-    upsertCompetition: (_, args) => {
-      const { where, create, update } = args;
-      // The create is needed by prisma. Removing for mocks
-      let competitionIndex = competitions.findIndex(
-        c => c.apiId === where.apiId
-      );
-      if (competitionIndex > -1) {
-        update.seasons = [];
-        competitions[competitionIndex] = update;
-        return update;
-      } else {
-        create.seasons = create.seasons.create;
-        competitions.push(create);
-        return create;
-      }
+    // upsertCompetition: (_, args) => {
+    //   const { where, create, update } = args;
+    //   // The create is needed by prisma. Removing for mocks
+    //   let competitionIndex = competitions.findIndex(
+    //     c => c.apiId === where.apiId
+    //   );
+    //   if (competitionIndex > -1) {
+    //     update.seasons = [];
+    //     competitions[competitionIndex] = update;
+    //     return update;
+    //   } else {
+    //     create.seasons = create.seasons.create;
+    //     competitions.push(create);
+    //     return create;
+    //   }
+    // },
+    createCompetition: (_, args) => {
+      const { data } = args;
+      data.seasons = data.seasons.create;
+      data.seasons[0].matches = data.seasons[0].matches.create;
+      competitions.push(data);
+      console.log(competitions[2].seasons[0].matches);
+      return data;
     },
   }),
 };

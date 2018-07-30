@@ -9,8 +9,8 @@ matches.push(
     stage: 'REGULAR_SEASON',
     group: 'Regular Season',
     lastUpdated: '2018-07-07T16:01:35Z',
-    homeTeam: 'Team 1',
-    awayTeam: 'Team 2',
+    homeTeam: { id: 1, name: 'Team 1' },
+    awayTeam: { id: 2, name: 'Team 2' },
     season: {
       apiId: 151,
     },
@@ -33,8 +33,8 @@ matches.push(
     stage: 'REGULAR_SEASON',
     group: 'Regular Season',
     lastUpdated: '2018-07-07T16:01:35Z',
-    homeTeam: 'Team 2',
-    awayTeam: 'Team 1',
+    homeTeam: { id: 2, name: 'Team 2' },
+    awayTeam: { id: 1, name: 'Team 1' },
     season: {
       apiId: 151,
     },
