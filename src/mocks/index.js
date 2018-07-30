@@ -102,7 +102,7 @@ const mocks = {
         competitions[competitionIndex] = update;
         return update;
       } else {
-        create.seasons = [];
+        create.seasons = create.seasons.create;
         competitions.push(create);
         return create;
       }
