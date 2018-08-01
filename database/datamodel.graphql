@@ -7,7 +7,7 @@ type User {
 
 type Pick {
   id: ID! @unique
-  team: Team! @relation(name: "PickedTeam")
+  team: String!
   success: Boolean! @default(value: "false")
   resolved: Boolean! @default(value: "false")
   match: Match!
@@ -60,8 +60,8 @@ type Match {
   group: String!
   status: String!
   lastUpdated: String
-  homeTeam: Team! @relation(name: "HomeTeam")
-  awayTeam: Team! @relation(name: "AwayTeam")
+  homeTeam: String!
+  awayTeam: String!
   season: Season!
   winner: String
   duration: String

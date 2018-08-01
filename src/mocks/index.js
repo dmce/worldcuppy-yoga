@@ -1,6 +1,7 @@
 import fixtures from './data-fixtures';
 import users from './data-users';
 import competitions from './data-competitions';
+import seasons from './data-seasons';
 import matches from './data-matches';
 import fd_competitions from './data-fd-competitions';
 import fd_matches from './data-fd-matches';
@@ -42,10 +43,13 @@ const mocks = {
       return competitions.filter(c => c.apiId === where.apiId);
     },
     season: (_, args) => {
-      return null;
+      const { where } = args;
+      return seasons.find(c => c.apiId === where.apiId);
     },
     seasons: (_, args) => {
-      return null;
+      const { where } = args;
+      if (where === undefined) return seasons;
+      return seasons.filter(c => c.apiId === where.apiId);
     },
     match: (_, args) => {
       return null;
@@ -107,12 +111,23 @@ const mocks = {
     //     return create;
     //   }
     // },
+    updateCompetition: (_, args) => {
+      const { data, where } = args;
+      let competitionIndex = competitions.findIndex(
+        c => c.apiId === where.apiId
+      );
+
+      if (competitionIndex > -1) {
+        data.seasons = competitions[competitionIndex].seasons;
+        competitions[competitionIndex] = data;
+        return data;
+      }
+      return null;
+    },
     createCompetition: (_, args) => {
       const { data } = args;
       data.seasons = data.seasons.create;
-      data.seasons[0].matches = data.seasons[0].matches.create;
       competitions.push(data);
-      console.log(competitions[2].seasons[0].matches);
       return data;
     },
   }),

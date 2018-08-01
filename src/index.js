@@ -13,6 +13,8 @@ const resolvers = {
   Query: {
     competitions: forwardTo('prisma'),
     competition: forwardTo('prisma'),
+    season: forwardTo('prisma'),
+    seasons: forwardTo('prisma'),
     match: forwardTo('prisma'),
     matches: forwardTo('prisma'),
     user: forwardTo('prisma'),
@@ -35,7 +37,7 @@ const resolvers = {
     },
   },
   Mutation: {
-    //upsertCompetition: forwardTo('prisma'),
+    updateCompetition: forwardTo('prisma'),
     createCompetition: forwardTo('prisma'),
   },
 };

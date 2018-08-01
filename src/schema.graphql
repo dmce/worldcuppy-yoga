@@ -2113,6 +2113,10 @@ type Mutation {
     create: CompetitionCreateInput!
     update: CompetitionUpdateInput!
   ): Competition!
+  updateCompetition(
+    data: CompetitionUpdateInput!
+    where: CompetitionWhereUniqueInput!
+  ): Competition
   createCompetition(data: CompetitionCreateInput!): Competition!
 }
 
@@ -2352,6 +2356,16 @@ type Query {
     last: Int
   ): [Competition]!
   competition(where: CompetitionWhereUniqueInput!): Competition
+  seasons(
+    where: SeasonWhereInput
+    orderBy: SeasonOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Season]!
+  season(where: SeasonWhereUniqueInput!): Season
   matches(
     where: MatchWhereInput
     orderBy: MatchOrderByInput
