@@ -126,7 +126,9 @@ const mocks = {
     },
     createCompetition: (_, args) => {
       const { data } = args;
+
       data.seasons = data.seasons.create;
+      seasons.push(data.seasons[0]);
       competitions.push(data);
       return data;
     },
